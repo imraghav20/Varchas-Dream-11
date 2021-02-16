@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "591142644941",
+    "project_id": "varchas-dream-11",
+    "storage_bucket": "varchas-dream-11.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:591142644941:android:252219fcf22bc2402a0d84",
+        "android_client_info": {
+          "package_name": "com.example.varchasdream11"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "591142644941-he7a94t0t5f6gkhbeqscu4644etttnio.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBFYCV4RUatM0ryv3JNqdFZwzq1x2aAUhI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "591142644941-he7a94t0t5f6gkhbeqscu4644etttnio.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
