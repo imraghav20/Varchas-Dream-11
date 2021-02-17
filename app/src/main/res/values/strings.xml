@@ -11,4 +11,11 @@
     <string name="login_failed">"Login failed"</string>
     <string name="sign_in">SIgn In</string>
     <string name="todo">TODO</string>
+    <string name="button">Button</string>
+    <string name="string_button" />
+    <string name="Dashboard" />
+    <string name="name">Name</string>
+    <string name="email">Email</string>
+    <string name="rank_in_leaderboard">Rank in leaderboard</string>
 </resources>
+
