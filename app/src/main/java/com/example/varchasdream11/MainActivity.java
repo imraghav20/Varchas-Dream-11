@@ -22,7 +22,7 @@ import Fragments.LeaderboardFragment;
 import Fragments.MymatchesFragment;
 
 public class MainActivity extends AppCompatActivity {
-
+    //comment
     ActivityMainBinding binding;
     FirebaseAuth auth;
 
