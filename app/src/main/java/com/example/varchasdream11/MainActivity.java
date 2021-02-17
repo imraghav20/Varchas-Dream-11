@@ -14,7 +14,6 @@ import com.example.varchasdream11.databinding.ActivityMainBinding;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
-    //comment
     ActivityMainBinding binding;
     FirebaseAuth auth;
     @Override
