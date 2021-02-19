@@ -6,7 +6,7 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    tools:context=".DashboardActivity">
+    >
 
     <LinearLayout
         android:id="@+id/dashboardLl1"
@@ -35,7 +35,7 @@
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:scaleType="centerCrop"
-                tools:srcCompat="@tools:sample/avatars"
+                app:srcCompat="@drawable/varchas_dummy_logo"
                 android:contentDescription="@string/todo" />
 
         </androidx.cardview.widget.CardView>
@@ -67,7 +67,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/dashboardLl1"
-        android:layout_marginTop="-77dp">
+        android:layout_marginTop="20dp">
 
         <LinearLayout
             android:id="@+id/dashboardLl2"
@@ -95,11 +95,11 @@
 
                     <ImageView
                         android:id="@+id/dashboardCard1Img"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="5dp"
+                        android:layout_width="50dp"
+                        android:layout_height="100dp"
+                        android:layout_marginEnd="5dp"
                         android:layout_weight="1"
-                        tools:srcCompat="@tools:sample/avatars" />
+                        app:srcCompat="@drawable/varchas_dummy_logo" />
 
                     <LinearLayout
                         android:id="@+id/dashboardCard1Ll2"
@@ -204,11 +204,11 @@
 
                     <ImageView
                         android:id="@+id/dashboardCard2Img"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_width="50dp"
+                        android:layout_height="100dp"
                         android:layout_marginRight="5dp"
                         android:layout_weight="1"
-                        tools:srcCompat="@tools:sample/avatars" />
+                        app:srcCompat="@drawable/varchas_dummy_logo" />
 
                     <LinearLayout
                         android:id="@+id/dashboardCard2Ll2"
@@ -303,11 +303,11 @@
 
                     <ImageView
                         android:id="@+id/dashboardCard3Img"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_width="50dp"
+                        android:layout_height="100dp"
                         android:layout_marginRight="5dp"
                         android:layout_weight="1"
-                        tools:srcCompat="@tools:sample/avatars" />
+                        app:srcCompat="@drawable/varchas_dummy_logo" />
 
                     <LinearLayout
                         android:id="@+id/dashboardCard3Ll2"
