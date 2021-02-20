@@ -1,5 +1,6 @@
 package Fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,7 +8,12 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
+import com.example.varchasdream11.MainActivity;
+import com.example.varchasdream11.Matches.Basketball;
+import com.example.varchasdream11.Matches.Cricket;
+import com.example.varchasdream11.Matches.Football;
 import com.example.varchasdream11.R;
 
 /**
@@ -60,7 +66,44 @@ public class ContestFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_contest, container, false);
+
+        //CRICKET ACTIVITY INTENT -------------------------->
+        View rootView = inflater.inflate(R.layout.fragment_contest, container, false);
+        Button button2 = (Button) rootView.findViewById(R.id.button2);
+        button2.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), Cricket.class);
+                startActivity(intent);
+            }
+        });
+
+        //FOOTBALL ACTIVITY INTENT -------------------------->
+        Button button3 = (Button) rootView.findViewById(R.id.button3);
+        button3.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), Football.class);
+                startActivity(intent);
+            }
+        });
+
+        //BASKETBALL ACTIVITY INTENT -------------------------->
+        Button button6 = (Button) rootView.findViewById(R.id.button6);
+        button6.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), Basketball.class);
+                startActivity(intent);
+            }
+        });
+
+        //BADMINTON ACTIVITY INTENT -------------------------->
+        Button button7 = (Button) rootView.findViewById(R.id.button7);
+        button7.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), Basketball.class);
+                startActivity(intent);
+            }
+        });
+
+        return rootView;
     }
 }
