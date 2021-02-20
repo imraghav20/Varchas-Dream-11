@@ -8,17 +8,111 @@
     android:orientation="vertical"
     >
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/gradient_background"
+            android:orientation="vertical">
+
     <Button
         android:id="@+id/button"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Button" />
+        android:layout_height="100dp"
+        android:drawableLeft="@drawable/football_logo"
+        android:drawableRight="@drawable/football_logo"
+        android:maxLines="3"
+        android:singleLine="false"
+        android:text="Seedhe Maut V Kuchh Bhi \n Timer"
+        android:textAlignment="center"
+        android:textIsSelectable="false" />
 
-    <TextView
-        android:id="@+id/textView"
+    <Button
+        android:id="@+id/button22"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Football Matches here"
-        android:textSize="24sp" />
+        android:layout_height="100dp"
+        android:drawableLeft="@drawable/football_logo"
+        android:drawableRight="@drawable/football_logo"
+        android:maxLines="3"
+        android:singleLine="false"
+        android:text="Seedhe Maut V Kuchh Bhi \n Timer"
+        android:textAlignment="center"
+        android:textIsSelectable="false" />
+
+    <Button
+        android:id="@+id/button23"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:drawableLeft="@drawable/football_logo"
+        android:drawableRight="@drawable/football_logo"
+        android:maxLines="3"
+        android:singleLine="false"
+        android:text="Seedhe Maut V Kuchh Bhi \n Timer"
+        android:textAlignment="center"
+        android:textIsSelectable="false" />
+
+    <Button
+        android:id="@+id/button24"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:drawableLeft="@drawable/football_logo"
+        android:drawableRight="@drawable/football_logo"
+        android:maxLines="3"
+        android:singleLine="false"
+        android:text="Seedhe Maut V Kuchh Bhi \n Timer"
+        android:textAlignment="center"
+        android:textIsSelectable="false" />
+
+    <Button
+        android:id="@+id/button25"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:drawableLeft="@drawable/football_logo"
+        android:drawableRight="@drawable/football_logo"
+        android:maxLines="3"
+        android:singleLine="false"
+        android:text="Seedhe Maut V Kuchh Bhi \n Timer"
+        android:textAlignment="center"
+        android:textIsSelectable="false" />
+
+    <Button
+        android:id="@+id/button26"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:drawableLeft="@drawable/football_logo"
+        android:drawableRight="@drawable/football_logo"
+        android:maxLines="3"
+        android:singleLine="false"
+        android:text="Seedhe Maut V Kuchh Bhi \n Timer"
+        android:textAlignment="center"
+        android:textIsSelectable="false" />
+
+            <Button
+                android:id="@+id/button39"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:drawableLeft="@drawable/football_logo"
+                android:drawableRight="@drawable/football_logo"
+                android:maxLines="3"
+                android:singleLine="false"
+                android:text="Seedhe Maut V Kuchh Bhi \n Timer"
+                android:textAlignment="center"
+                android:textIsSelectable="false" />
+
+            <Button
+                android:id="@+id/button40"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:drawableLeft="@drawable/football_logo"
+                android:drawableRight="@drawable/football_logo"
+                android:maxLines="3"
+                android:singleLine="false"
+                android:text="Seedhe Maut V Kuchh Bhi \n Timer"
+                android:textAlignment="center"
+                android:textIsSelectable="false" />
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

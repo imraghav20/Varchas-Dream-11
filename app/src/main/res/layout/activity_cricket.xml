@@ -4,21 +4,114 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
     android:orientation="vertical"
     tools:context=".Matches.Cricket">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/gradient_background"
+            android:orientation="vertical">
+
     <Button
         android:id="@+id/button4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button" />
-
-    <TextView
-        android:id="@+id/textView2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Cricket matches here"
-        android:textSize="24sp" />
+        android:layout_height="100dp"
+        android:drawableLeft="@drawable/cricket_logo_remastered"
+        android:drawableRight="@drawable/cricket_logo_remastered"
+        android:maxLines="3"
+        android:singleLine="false"
+        android:text="Seedhe Maut V Kuchh Bhi \n Timer"
+        android:textAlignment="center"
+        android:textIsSelectable="false" />
+
+    <Button
+        android:id="@+id/button17"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:drawableLeft="@drawable/cricket_logo_remastered"
+        android:drawableRight="@drawable/cricket_logo_remastered"
+        android:maxLines="3"
+        android:singleLine="false"
+        android:text="Seedhe Maut V Kuchh Bhi \n Timer"
+        android:textAlignment="center"
+        android:textIsSelectable="false" />
+
+    <Button
+        android:id="@+id/button18"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:drawableLeft="@drawable/cricket_logo_remastered"
+        android:drawableRight="@drawable/cricket_logo_remastered"
+        android:maxLines="3"
+        android:singleLine="false"
+        android:text="Seedhe Maut V Kuchh Bhi \n Timer"
+        android:textAlignment="center"
+        android:textIsSelectable="false" />
+
+    <Button
+        android:id="@+id/button19"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:drawableLeft="@drawable/cricket_logo_remastered"
+        android:drawableRight="@drawable/cricket_logo_remastered"
+        android:maxLines="3"
+        android:singleLine="false"
+        android:text="Seedhe Maut V Kuchh Bhi \n Timer"
+        android:textAlignment="center"
+        android:textIsSelectable="false" />
+
+    <Button
+        android:id="@+id/button20"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:drawableLeft="@drawable/cricket_logo_remastered"
+        android:drawableRight="@drawable/cricket_logo_remastered"
+        android:maxLines="3"
+        android:singleLine="false"
+        android:text="Seedhe Maut V Kuchh Bhi \n Timer"
+        android:textAlignment="center"
+        android:textIsSelectable="false" />
+
+    <Button
+        android:id="@+id/button21"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:drawableLeft="@drawable/cricket_logo_remastered"
+        android:drawableRight="@drawable/cricket_logo_remastered"
+        android:maxLines="3"
+        android:singleLine="false"
+        android:text="Seedhe Maut V Kuchh Bhi \n Timer"
+        android:textAlignment="center"
+        android:textIsSelectable="false" />
+
+            <Button
+                android:id="@+id/button37"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:drawableLeft="@drawable/cricket_logo_remastered"
+                android:drawableRight="@drawable/cricket_logo_remastered"
+                android:maxLines="3"
+                android:singleLine="false"
+                android:text="Seedhe Maut V Kuchh Bhi \n Timer"
+                android:textAlignment="center"
+                android:textIsSelectable="false" />
+
+            <Button
+                android:id="@+id/button38"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:drawableLeft="@drawable/cricket_logo_remastered"
+                android:drawableRight="@drawable/cricket_logo_remastered"
+                android:maxLines="3"
+                android:singleLine="false"
+                android:text="Seedhe Maut V Kuchh Bhi \n Timer"
+                android:textAlignment="center"
+                android:textIsSelectable="false" />
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

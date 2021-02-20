@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.varchasdream11.MainActivity;
+import com.example.varchasdream11.Matches.Badminton;
 import com.example.varchasdream11.Matches.Basketball;
 import com.example.varchasdream11.Matches.Cricket;
 import com.example.varchasdream11.Matches.Football;
@@ -99,7 +100,7 @@ public class ContestFragment extends Fragment {
         Button button7 = (Button) rootView.findViewById(R.id.button7);
         button7.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), Basketball.class);
+                Intent intent = new Intent(getActivity(), Badminton.class);
                 startActivity(intent);
             }
         });
