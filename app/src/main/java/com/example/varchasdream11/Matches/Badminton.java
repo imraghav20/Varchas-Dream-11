@@ -16,3 +16,13 @@ public class Badminton extends AppCompatActivity {
         setContentView(binding.getRoot());
     }
 }
+
+/*
+
+
+
+
+
+
+athletics
+ */
