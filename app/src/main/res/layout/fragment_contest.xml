@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:backgroundTint="#FFFFFF"
     android:orientation="vertical"
-    tools:context="Fragments.ContestFragment">
+    tools:context=".Fragments.ContestFragment">
 
     <ScrollView
         android:layout_width="match_parent"

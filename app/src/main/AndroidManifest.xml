@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Matches.Badminton"></activity>
+        <activity android:name=".TeamSelection.TeamSelectionActivity"></activity>
+        <activity android:name=".Matches.Badminton" />
         <activity android:name=".Matches.Basketball" />
         <activity android:name=".Matches.Football" />
         <activity android:name=".Matches.Cricket" />

@@ -1,4 +1,4 @@
-package Fragments;
+package com.example.varchasdream11.Fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.example.varchasdream11.MainActivity;
 import com.example.varchasdream11.Matches.Badminton;
 import com.example.varchasdream11.Matches.Basketball;
 import com.example.varchasdream11.Matches.Cricket;

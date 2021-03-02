@@ -16,10 +16,10 @@ import com.example.varchasdream11.databinding.ActivityMainBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
-import Fragments.ContestFragment;
-import Fragments.DashboardFragment;
-import Fragments.LeaderboardFragment;
-import Fragments.MymatchesFragment;
+import com.example.varchasdream11.Fragments.ContestFragment;
+import com.example.varchasdream11.Fragments.DashboardFragment;
+import com.example.varchasdream11.Fragments.LeaderboardFragment;
+import com.example.varchasdream11.Fragments.MymatchesFragment;
 
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
