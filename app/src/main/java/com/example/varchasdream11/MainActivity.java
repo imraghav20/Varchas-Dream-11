@@ -1,9 +1,5 @@
 package com.example.varchasdream11;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,14 +8,18 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+
 import com.example.varchasdream11.databinding.ActivityMainBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
-import Fragments.ContestFragment;
-import Fragments.DashboardFragment;
-import Fragments.LeaderboardFragment;
-import Fragments.MymatchesFragment;
+import com.example.varchasdream11.Fragments.ContestFragment;
+import com.example.varchasdream11.Fragments.DashboardFragment;
+import com.example.varchasdream11.Fragments.LeaderboardFragment;
+import com.example.varchasdream11.Fragments.MymatchesFragment;
 
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
@@ -27,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -36,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new DashboardFragment()).commit();
 
         auth = FirebaseAuth.getInstance();
+
+
     }
 
     @Override

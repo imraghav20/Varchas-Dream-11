@@ -1,9 +1,11 @@
 package com.example.varchasdream11.Models;
 
 public class Users {
+    int pic;
     String profilePic, userName, mail, password, userId, lastMessage;
 
-    public Users(String profilePic, String userName, String mail, String password, String userId, String lastMessage) {
+    public Users(String profilePic, String userName, String mail, String password, String userId, String lastMessage, int pic) {
+        this.pic = pic;
         this.profilePic = profilePic;
         this.userName = userName;
         this.mail = mail;
@@ -12,7 +14,19 @@ public class Users {
         this.lastMessage = lastMessage;
     }
 
-    public Users(){} //Empty Constructor
+    public Users() {
+
+    }
+
+    public int getPic() {
+        return pic;
+    }
+
+    public void setPic(int pic) {
+        this.pic = pic;
+    }
+
+    public Users(String burger){} //Empty Constructor
 
     public String getProfilePic() {
         return profilePic;

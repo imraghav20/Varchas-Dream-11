@@ -1,4 +1,4 @@
-package Fragments;
+package com.example.varchasdream11.Fragments;
 
 import android.os.Bundle;
 
