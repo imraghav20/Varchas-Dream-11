@@ -10,10 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.example.varchasdream11.Matches.Badminton;
-import com.example.varchasdream11.Matches.Basketball;
-import com.example.varchasdream11.Matches.Cricket;
-import com.example.varchasdream11.Matches.Football;
+import com.example.varchasdream11.Matches.Sports;
 import com.example.varchasdream11.R;
 
 /**
@@ -67,12 +64,15 @@ public class ContestFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+
+
         //CRICKET ACTIVITY INTENT -------------------------->
         View rootView = inflater.inflate(R.layout.fragment_contest, container, false);
         Button button2 = (Button) rootView.findViewById(R.id.button2);
         button2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), Cricket.class);
+                Intent intent = new Intent(getActivity(), Sports.class);
+                intent.putExtra("sports_name", "Cricket");
                 startActivity(intent);
             }
         });
@@ -81,7 +81,8 @@ public class ContestFragment extends Fragment {
         Button button3 = (Button) rootView.findViewById(R.id.button3);
         button3.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), Football.class);
+                Intent intent = new Intent(getActivity(), Sports.class);
+                intent.putExtra("sports_name", "Football");
                 startActivity(intent);
             }
         });
@@ -90,7 +91,8 @@ public class ContestFragment extends Fragment {
         Button button6 = (Button) rootView.findViewById(R.id.button6);
         button6.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), Basketball.class);
+                Intent intent = new Intent(getActivity(), Sports.class);
+                intent.putExtra("sports_name", "Basketball");
                 startActivity(intent);
             }
         });
@@ -99,7 +101,81 @@ public class ContestFragment extends Fragment {
         Button button7 = (Button) rootView.findViewById(R.id.button7);
         button7.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), Badminton.class);
+                Intent intent = new Intent(getActivity(), Sports.class);
+                intent.putExtra("sports_name", "Badminton");
+                startActivity(intent);
+            }
+        });
+
+        //BADMINTON ACTIVITY INTENT -------------------------->
+        Button button8 = (Button) rootView.findViewById(R.id.button8);
+        button8.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), Sports.class);
+                intent.putExtra("sports_name", "Volleyball");
+                startActivity(intent);
+            }
+        });
+
+        Button button9 = (Button) rootView.findViewById(R.id.button9);
+        button9.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), Sports.class);
+                intent.putExtra("sports_name", "LawnTennis");
+                startActivity(intent);
+            }
+        });
+
+        Button button10 = (Button) rootView.findViewById(R.id.button10);
+        button10.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), Sports.class);
+                intent.putExtra("sports_name", "TableTennis");
+                startActivity(intent);
+            }
+        });
+
+        Button button11 = (Button) rootView.findViewById(R.id.button11);
+        button11.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), Sports.class);
+                intent.putExtra("sports_name", "Chess");
+                startActivity(intent);
+            }
+        });
+
+        Button button12 = (Button) rootView.findViewById(R.id.button12);
+        button12.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), Sports.class);
+                intent.putExtra("sports_name", "Athletics");
+                startActivity(intent);
+            }
+        });
+
+        Button button13 = (Button) rootView.findViewById(R.id.button13);
+        button13.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), Sports.class);
+                intent.putExtra("sports_name", "Kabaddi");
+                startActivity(intent);
+            }
+        });
+
+        Button button14 = (Button) rootView.findViewById(R.id.button14);
+        button14.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), Sports.class);
+                intent.putExtra("sports_name", "Valorant");
+                startActivity(intent);
+            }
+        });
+
+        Button button15 = (Button) rootView.findViewById(R.id.button15);
+        button15.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), Sports.class);
+                intent.putExtra("sports_name", "CSGO");
                 startActivity(intent);
             }
         });

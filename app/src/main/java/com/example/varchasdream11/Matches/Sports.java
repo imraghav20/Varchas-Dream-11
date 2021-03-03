@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.varchasdream11.R;
 import com.example.varchasdream11.TeamSelection.TeamSelectionActivity;
-import com.example.varchasdream11.databinding.ActivityBadmintonBinding;
+import com.example.varchasdream11.databinding.ActivitySportsBinding;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
@@ -23,21 +23,24 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
 
-public class Badminton extends AppCompatActivity {
+public class Sports extends AppCompatActivity {
 
-    private RecyclerView BadmintonRecyclerList;
+    private RecyclerView SportsRecyclerList;
     private DatabaseReference MatchRef;
-    ActivityBadmintonBinding binding;
+    private String sports_name;
+    ActivitySportsBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityBadmintonBinding.inflate(getLayoutInflater());
+        binding = ActivitySportsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        MatchRef = FirebaseDatabase.getInstance().getReference().child("Badminton");
+        sports_name = getIntent().getExtras().get("sports_name").toString();
 
-        BadmintonRecyclerList = (RecyclerView) findViewById(R.id.badmintonRecyclerList);
-        BadmintonRecyclerList.setLayoutManager(new LinearLayoutManager(this));
+        MatchRef = FirebaseDatabase.getInstance().getReference().child("Games").child(sports_name);
+
+        SportsRecyclerList = (RecyclerView) findViewById(R.id.sportsRecyclerList);
+        SportsRecyclerList.setLayoutManager(new LinearLayoutManager(this));
     }
 
     @Override
@@ -47,7 +50,7 @@ public class Badminton extends AppCompatActivity {
         FirebaseRecyclerOptions<Match> options = new FirebaseRecyclerOptions.Builder<Match>()
                 .setQuery(MatchRef, Match.class)
                 .build();
-
+        
 
         FirebaseRecyclerAdapter<Match, MatchViewHolder> adapter = new FirebaseRecyclerAdapter<Match, MatchViewHolder>(options) {
             @Override
@@ -56,15 +59,15 @@ public class Badminton extends AppCompatActivity {
                 holder.team2Text.setText(model.getTeam2Name());
                 holder.matchTime.setText(model.getMatchTime());
 
-                Picasso.get().load(model.getTeam1Image()).placeholder(R.drawable.badminton_logo).into(holder.team1Image);
-                Picasso.get().load(model.getTeam2Image()).placeholder(R.drawable.badminton_logo).into(holder.team2Image);
+                Picasso.get().load(model.getTeam1Image()).placeholder(R.drawable.cricket_logo_remastered).into(holder.team1Image);
+                Picasso.get().load(model.getTeam2Image()).placeholder(R.drawable.cricket_logo_remastered).into(holder.team2Image);
 
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         String match_id = getRef(position).getKey();
 
-                        Intent matchIntent = new Intent(Badminton.this, TeamSelectionActivity.class);
+                        Intent matchIntent = new Intent(Sports.this, TeamSelectionActivity.class);
                         matchIntent.putExtra("match_id", match_id);
                         startActivity(matchIntent);
                     }
@@ -80,7 +83,7 @@ public class Badminton extends AppCompatActivity {
             }
         };
 
-        BadmintonRecyclerList.setAdapter(adapter);
+        SportsRecyclerList.setAdapter(adapter);
         adapter.startListening();
     }
 
