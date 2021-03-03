@@ -12,10 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".TeamSelection.TeamSelectionActivity"></activity>
-        <activity android:name=".Matches.Badminton" />
-        <activity android:name=".Matches.Basketball" />
-        <activity android:name=".Matches.Football" />
-        <activity android:name=".Matches.Cricket" />
+        <activity android:name=".Matches.Sports" />
         <activity android:name=".SignInActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
