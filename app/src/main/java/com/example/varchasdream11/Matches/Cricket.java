@@ -28,7 +28,6 @@ public class Cricket extends AppCompatActivity {
 
     private RecyclerView CricketRecyclerList;
     private DatabaseReference MatchRef;
-    ProgressBar mProgressBar;
     ActivityCricketBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

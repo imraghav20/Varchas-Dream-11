@@ -1,118 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Matches.Badminton"
     android:orientation="vertical"
+    tools:context=".Matches.Cricket"
+    android:background="@drawable/gradient_background"
     >
 
-    <ScrollView
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/badmintonRecyclerList"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/gradient_background"
-            android:orientation="vertical">
-
-    <Button
-        android:id="@+id/button16"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:drawableLeft="@drawable/badminton_logo"
-        android:drawableRight="@drawable/badminton_logo"
-        android:maxLines="3"
-        android:singleLine="false"
-        android:text="Seedhe Maut V Kuchh Bhi \n Timer"
-        android:textAlignment="center"
-        android:textIsSelectable="false" />
-
-    <Button
-        android:id="@+id/button27"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:drawableLeft="@drawable/badminton_logo"
-        android:drawableRight="@drawable/badminton_logo"
-        android:maxLines="3"
-        android:singleLine="false"
-        android:text="Seedhe Maut V Kuchh Bhi \n Timer"
-        android:textAlignment="center"
-        android:textIsSelectable="false" />
-
-    <Button
-        android:id="@+id/button28"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:drawableLeft="@drawable/badminton_logo"
-        android:drawableRight="@drawable/badminton_logo"
-        android:maxLines="3"
-        android:singleLine="false"
-        android:text="Seedhe Maut V Kuchh Bhi \n Timer"
-        android:textAlignment="center"
-        android:textIsSelectable="false" />
-
-    <Button
-        android:id="@+id/button29"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:drawableLeft="@drawable/badminton_logo"
-        android:drawableRight="@drawable/badminton_logo"
-        android:maxLines="3"
-        android:singleLine="false"
-        android:text="Seedhe Maut V Kuchh Bhi \n Timer"
-        android:textAlignment="center"
-        android:textIsSelectable="false" />
-
-    <Button
-        android:id="@+id/button30"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:drawableLeft="@drawable/badminton_logo"
-        android:drawableRight="@drawable/badminton_logo"
-        android:maxLines="3"
-        android:singleLine="false"
-        android:text="Seedhe Maut V Kuchh Bhi \n Timer"
-        android:textAlignment="center"
-        android:textIsSelectable="false" />
-
-    <Button
-        android:id="@+id/button31"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:drawableLeft="@drawable/badminton_logo"
-        android:drawableRight="@drawable/badminton_logo"
-        android:maxLines="3"
-        android:singleLine="false"
-        android:text="Seedhe Maut V Kuchh Bhi \n Timer"
-        android:textAlignment="center"
-        android:textIsSelectable="false" />
-
-            <Button
-                android:id="@+id/button41"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:drawableLeft="@drawable/badminton_logo"
-                android:drawableRight="@drawable/badminton_logo"
-                android:maxLines="3"
-                android:singleLine="false"
-                android:text="Seedhe Maut V Kuchh Bhi \n Timer"
-                android:textAlignment="center"
-                android:textIsSelectable="false" />
-
-            <Button
-                android:id="@+id/button42"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:drawableLeft="@drawable/badminton_logo"
-                android:drawableRight="@drawable/badminton_logo"
-                android:maxLines="3"
-                android:singleLine="false"
-                android:text="Seedhe Maut V Kuchh Bhi \n Timer"
-                android:textAlignment="center"
-                android:textIsSelectable="false" />
-        </LinearLayout>
-    </ScrollView>
-</LinearLayout>
+</RelativeLayout>
