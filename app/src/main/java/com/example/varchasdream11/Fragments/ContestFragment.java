@@ -1,20 +1,19 @@
-package com.example.varchasdream11.Fragments;
+package Fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-
+import com.example.varchasdream11.MainActivity;
 import com.example.varchasdream11.Matches.Badminton;
 import com.example.varchasdream11.Matches.Basketball;
-
+import com.example.varchasdream11.Matches.Cricket;
 import com.example.varchasdream11.Matches.Football;
 import com.example.varchasdream11.R;
 
@@ -24,8 +23,6 @@ import com.example.varchasdream11.R;
  * create an instance of this fragment.
  */
 public class ContestFragment extends Fragment {
-
-    RecyclerView recyclerView;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -60,18 +57,12 @@ public class ContestFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-
-
-
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
-
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -82,7 +73,7 @@ public class ContestFragment extends Fragment {
         Button button2 = (Button) rootView.findViewById(R.id.button2);
         button2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), Football.class);
+                Intent intent = new Intent(getActivity(), Cricket.class);
                 startActivity(intent);
             }
         });
