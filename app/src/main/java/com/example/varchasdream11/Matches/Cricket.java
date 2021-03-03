@@ -1,17 +1,18 @@
 package com.example.varchasdream11.Matches;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.varchasdream11.R;
 import com.example.varchasdream11.TeamSelection.TeamSelectionActivity;
@@ -27,7 +28,6 @@ public class Cricket extends AppCompatActivity {
 
     private RecyclerView CricketRecyclerList;
     private DatabaseReference MatchRef;
-
     ActivityCricketBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +55,8 @@ public class Cricket extends AppCompatActivity {
             protected void onBindViewHolder(@NonNull MatchViewHolder holder, final int position, @NonNull Match model) {
                 holder.team1Text.setText(model.getTeam1Name());
                 holder.team2Text.setText(model.getTeam2Name());
+                holder.matchTime.setText(model.getMatchTime());
+
                 Picasso.get().load(model.getTeam1Image()).placeholder(R.drawable.cricket_logo_remastered).into(holder.team1Image);
                 Picasso.get().load(model.getTeam2Image()).placeholder(R.drawable.cricket_logo_remastered).into(holder.team2Image);
 
@@ -85,12 +87,13 @@ public class Cricket extends AppCompatActivity {
 
     public static class MatchViewHolder extends RecyclerView.ViewHolder{
 
-        TextView team1Text, team2Text;
+        TextView team1Text, team2Text, matchTime;
         ImageView team1Image, team2Image;
 
         public MatchViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            matchTime = itemView.findViewById(R.id.matchTime);
             team1Text = itemView.findViewById(R.id.team1Text);
             team2Text = itemView.findViewById(R.id.team2Text);
             team1Image = itemView.findViewById(R.id.team1Image);
