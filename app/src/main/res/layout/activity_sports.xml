@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Matches.Cricket"
+    tools:context=".Matches.Sports"
     android:background="@drawable/gradient_background"
     >
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/cricketRecyclerList"
+        android:id="@+id/sportsRecyclerList"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

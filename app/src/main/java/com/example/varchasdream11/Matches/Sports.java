@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.varchasdream11.R;
 import com.example.varchasdream11.TeamSelection.TeamSelectionActivity;
-import com.example.varchasdream11.databinding.ActivityCricketBinding;
+import com.example.varchasdream11.databinding.ActivitySportsBinding;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
@@ -23,24 +23,24 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
 
-public class Cricket extends AppCompatActivity {
+public class Sports extends AppCompatActivity {
 
-    private RecyclerView CricketRecyclerList;
+    private RecyclerView SportsRecyclerList;
     private DatabaseReference MatchRef;
     private String sports_name;
-    ActivityCricketBinding binding;
+    ActivitySportsBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityCricketBinding.inflate(getLayoutInflater());
+        binding = ActivitySportsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         sports_name = getIntent().getExtras().get("sports_name").toString();
 
         MatchRef = FirebaseDatabase.getInstance().getReference().child("Games").child(sports_name);
 
-        CricketRecyclerList = (RecyclerView) findViewById(R.id.cricketRecyclerList);
-        CricketRecyclerList.setLayoutManager(new LinearLayoutManager(this));
+        SportsRecyclerList = (RecyclerView) findViewById(R.id.sportsRecyclerList);
+        SportsRecyclerList.setLayoutManager(new LinearLayoutManager(this));
     }
 
     @Override
@@ -67,7 +67,7 @@ public class Cricket extends AppCompatActivity {
                     public void onClick(View v) {
                         String match_id = getRef(position).getKey();
 
-                        Intent matchIntent = new Intent(Cricket.this, TeamSelectionActivity.class);
+                        Intent matchIntent = new Intent(Sports.this, TeamSelectionActivity.class);
                         matchIntent.putExtra("match_id", match_id);
                         startActivity(matchIntent);
                     }
@@ -83,7 +83,7 @@ public class Cricket extends AppCompatActivity {
             }
         };
 
-        CricketRecyclerList.setAdapter(adapter);
+        SportsRecyclerList.setAdapter(adapter);
         adapter.startListening();
     }
 
