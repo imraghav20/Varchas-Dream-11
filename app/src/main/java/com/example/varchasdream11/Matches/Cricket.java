@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -28,6 +27,7 @@ public class Cricket extends AppCompatActivity {
 
     private RecyclerView CricketRecyclerList;
     private DatabaseReference MatchRef;
+    private String sports_name;
     ActivityCricketBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +35,9 @@ public class Cricket extends AppCompatActivity {
         binding = ActivityCricketBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        MatchRef = FirebaseDatabase.getInstance().getReference().child("Users");
+        sports_name = getIntent().getExtras().get("sports_name").toString();
+
+        MatchRef = FirebaseDatabase.getInstance().getReference().child("Games").child(sports_name);
 
         CricketRecyclerList = (RecyclerView) findViewById(R.id.cricketRecyclerList);
         CricketRecyclerList.setLayoutManager(new LinearLayoutManager(this));
