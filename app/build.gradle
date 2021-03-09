@@ -46,6 +46,6 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:26.0.0')
     implementation 'com.firebaseui:firebase-ui-database:7.1.1'
     implementation 'com.squareup.picasso:picasso:2.71828'
-
+    implementation 'com.github.iwgang:countdownview:2.1.6' //Timer
 
 }
