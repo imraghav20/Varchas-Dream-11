@@ -40,26 +40,26 @@
 
         </androidx.cardview.widget.CardView>
 
-        <EditText
+        <TextView
             android:id="@+id/etName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:autofillHints=""
-            android:ems="10"
-            android:hint="@string/name"
-            android:inputType="textPersonName" />
+            android:gravity="center"
+            android:text="Name"
+            android:textColor="#000000"
+            android:textSize="24sp" />
 
-        <EditText
+        <TextView
             android:id="@+id/etEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
-            android:autofillHints=""
-            android:ems="10"
-            android:hint="@string/email"
-            android:inputType="textEmailAddress" />
+            android:gravity="center"
+            android:text="Email ID"
+            android:textColor="#000000"
+            android:textSize="18sp" />
     </LinearLayout>
 
     <ScrollView
