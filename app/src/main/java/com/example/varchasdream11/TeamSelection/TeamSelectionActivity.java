@@ -104,7 +104,7 @@ public class TeamSelectionActivity extends AppCompatActivity {
             @Override
             protected void onBindViewHolder(@NonNull final TeamViewHolder holder, final int position, @NonNull Team model) {
                 holder.playerName.setText(model.getPlayerName());
-//                holder.playerTeam.setText(model.getPlayerTeam());
+//              holder.playerTeam.setText(model.getPlayerTeam());
                 holder.playerCategory.setText(model.getPlayerCategory());
                 holder.playerCredits.setText(model.getPlayerCredits());
                 total_players_A+=1;
@@ -115,8 +115,6 @@ public class TeamSelectionActivity extends AppCompatActivity {
                 TextView teamA_ref = (TextView)findViewById(R.id.textView3);
                 teamA_ref.setText(teamB_count+"/"+total_players_A);
 
-                //final int[] row_index = {-1};
-                //int ref_pos = position;
                 final int[] cardArray = new int[100];
                 Picasso.get().load(model.getPlayerImage()).placeholder(R.drawable.cricket_logo_remastered).into(holder.playerImage);
 
@@ -130,23 +128,42 @@ public class TeamSelectionActivity extends AppCompatActivity {
                         public void onClick(View v) {
                             //Toast.makeText(TeamSelectionActivity.this, position+"Card is selected", Toast.LENGTH_SHORT).show();
 
-                                cardArray[position] += 1;
+                                color_ref = "#ffffff";
+                                color_text_ref = "#ffffff";
+//                              teamA_count += 1;
 
-                                if ((cardArray[position] % 2 != 0)) {
+                                if (teamA_count<7 ) {
+                                    cardArray[position] += 1;
+                                    if ((cardArray[position] % 2 != 0)) {
+                                        //Toast.makeText(TeamSelectionActivity.this, "if tap", Toast.LENGTH_SHORT).show();
+                                        teamA_count+=1;
+                                        color_ref = "#000000";
+                                        color_text_ref = "#000000";
+                                        total_points += Integer.parseInt(holder.playerCredits.getText().toString());
+                                        //holder.layout_ref.setBackgroundColor(Color.parseColor("#ffffff"));
+                                    } else {
+                                        //Toast.makeText(TeamSelectionActivity.this, "else tap", Toast.LENGTH_SHORT).show();
+                                        teamA_count -= 1;
+                                        color_ref = "#ffffff";
+                                        color_text_ref = "#ffffff";
+                                        total_points -= Integer.parseInt(holder.playerCredits.getText().toString());
 
-                                    color_ref = "#000000";
-                                    color_text_ref = "#000000";
-                                    total_points += Integer.parseInt(holder.playerCredits.getText().toString());
-                                    teamA_count += 1;
-
-                                    //holder.layout_ref.setBackgroundColor(Color.parseColor("#ffffff"));
-                                } else {
-                                    color_ref = "#ffffff";
-                                    color_text_ref = "#ffffff";
-                                    total_points -= Integer.parseInt(holder.playerCredits.getText().toString());
-                                    teamA_count -= 1;
+                                    }
                                 }
+                                else{
 
+                                    if ((cardArray[position] % 2 != 0)){
+                                        //Toast.makeText(TeamSelectionActivity.this, "final", Toast.LENGTH_SHORT).show();
+                                        cardArray[position]+=1;
+                                        teamA_count -= 1;
+                                        color_ref = "#ffffff";
+                                        color_text_ref = "#ffffff";
+                                        total_points -= Integer.parseInt(holder.playerCredits.getText().toString());
+                                    }
+                                    else{
+                                        Toast.makeText(TeamSelectionActivity.this, "Maximum 7 from a team only", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
 
                                 holder.playerCredits.setTextColor(Color.parseColor(color_text_ref));
                                 holder.itemView.setBackgroundColor(Color.parseColor(color_ref));
@@ -156,14 +173,8 @@ public class TeamSelectionActivity extends AppCompatActivity {
                                 points_ref.setText(total_points + "/100");
 
                                 TextView teamA_ref = (TextView) findViewById(R.id.textView3);
-                                //Toast.makeText(TeamSelectionActivity.this, adapter1.getItemCount()+"", Toast.LENGTH_SHORT).show();
                                 teamA_ref.setText(teamA_count + "/" + total_players_A);
 
-//                        String match_id = getRef(position).getKey();
-//
-//                        Intent matchIntent = new Intent(Sports.this, TeamSelectionActivity.class);
-//                        matchIntent.putExtra("match_id", match_id);
-//                        startActivity(matchIntent);
 
 
 
@@ -234,11 +245,6 @@ public class TeamSelectionActivity extends AppCompatActivity {
                         TextView teamB_ref = (TextView)findViewById(R.id.textView4);
                         teamB_ref.setText(teamB_count+"/"+total_players_B);
 
-//                        String match_id = getRef(position).getKey();
-
-//                        Intent matchIntent = new Intent(Sports.this, TeamSelectionActivity.class);
-//                        matchIntent.putExtra("match_id", match_id);
-//                        startActivity(matchIntent);
 
 
                     }
