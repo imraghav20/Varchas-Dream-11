@@ -167,7 +167,7 @@ public class TeamSelectionActivity extends AppCompatActivity {
                                         else if(teamA_count==7 || teamB_count==7){
                                             Toast.makeText(TeamSelectionActivity.this, "Maximum 7 from a single team", Toast.LENGTH_SHORT).show();
                                         }
-
+                                    // This comment was for the sake of pushing commit
                                     }
                                 }
 
