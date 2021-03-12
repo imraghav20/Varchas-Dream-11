@@ -2,16 +2,20 @@ package com.example.varchasdream11.TeamSelection;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,8 +30,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class TeamSelectionActivity extends AppCompatActivity {
 
@@ -36,11 +42,18 @@ public class TeamSelectionActivity extends AppCompatActivity {
     private DatabaseReference Team1Ref;
     private String team1_name;
     ActivityTeamSelectionBinding binding;
-
     private RecyclerView Team2RecyclerList;
     private DatabaseReference Team2Ref;
     private String team2_name;
-
+    public int total_points = 0;
+    public int teamA_count = 0;
+    public int teamB_count = 0;
+    public String color_ref = "#000000";
+    public String color_text_ref;
+    public String color_ref_2 ;
+    public  String color_text_ref_2;
+    public int total_players_A = 0;
+    public int total_players_B = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,20 +100,65 @@ public class TeamSelectionActivity extends AppCompatActivity {
                 .setQuery(Team2Ref, Team.class)
                 .build();
 
-        FirebaseRecyclerAdapter<Team, TeamViewHolder> adapter1 = new FirebaseRecyclerAdapter<Team, TeamViewHolder>(options1) {
+        final FirebaseRecyclerAdapter<Team, TeamViewHolder> adapter1 = new FirebaseRecyclerAdapter<Team, TeamViewHolder>(options1) {
             @Override
             protected void onBindViewHolder(@NonNull final TeamViewHolder holder, final int position, @NonNull Team model) {
                 holder.playerName.setText(model.getPlayerName());
 //                holder.playerTeam.setText(model.getPlayerTeam());
                 holder.playerCategory.setText(model.getPlayerCategory());
                 holder.playerCredits.setText(model.getPlayerCredits());
+                total_players_A+=1;
 
+                TextView points_ref = (TextView)findViewById(R.id.textView6);
+                points_ref.setText(total_points+"/100");
+
+                TextView teamA_ref = (TextView)findViewById(R.id.textView3);
+                teamA_ref.setText(teamB_count+"/"+total_players_A);
+
+                //final int[] row_index = {-1};
+                //int ref_pos = position;
+                final int[] cardArray = new int[100];
                 Picasso.get().load(model.getPlayerImage()).placeholder(R.drawable.cricket_logo_remastered).into(holder.playerImage);
 
-                holder.itemView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Toast.makeText(TeamSelectionActivity.this, "Card is selected", Toast.LENGTH_SHORT).show();
+
+
+                    holder.itemView.setOnClickListener(new View.OnClickListener() {
+
+                        @SuppressLint("SetTextI18n")
+                        @Override
+
+                        public void onClick(View v) {
+                            //Toast.makeText(TeamSelectionActivity.this, position+"Card is selected", Toast.LENGTH_SHORT).show();
+
+                                cardArray[position] += 1;
+
+                                if ((cardArray[position] % 2 != 0)) {
+
+                                    color_ref = "#000000";
+                                    color_text_ref = "#000000";
+                                    total_points += Integer.parseInt(holder.playerCredits.getText().toString());
+                                    teamA_count += 1;
+
+                                    //holder.layout_ref.setBackgroundColor(Color.parseColor("#ffffff"));
+                                } else {
+                                    color_ref = "#ffffff";
+                                    color_text_ref = "#ffffff";
+                                    total_points -= Integer.parseInt(holder.playerCredits.getText().toString());
+                                    teamA_count -= 1;
+                                }
+
+
+                                holder.playerCredits.setTextColor(Color.parseColor(color_text_ref));
+                                holder.itemView.setBackgroundColor(Color.parseColor(color_ref));
+                                holder.playerCategory.setTextColor(Color.parseColor(color_text_ref));
+
+                                TextView points_ref = (TextView) findViewById(R.id.textView6);
+                                points_ref.setText(total_points + "/100");
+
+                                TextView teamA_ref = (TextView) findViewById(R.id.textView3);
+                                //Toast.makeText(TeamSelectionActivity.this, adapter1.getItemCount()+"", Toast.LENGTH_SHORT).show();
+                                teamA_ref.setText(teamA_count + "/" + total_players_A);
+
 //                        String match_id = getRef(position).getKey();
 //
 //                        Intent matchIntent = new Intent(Sports.this, TeamSelectionActivity.class);
@@ -108,9 +166,13 @@ public class TeamSelectionActivity extends AppCompatActivity {
 //                        startActivity(matchIntent);
 
 
-                    }
-                });
-            }
+
+                        }
+
+                    });
+                }
+
+
 
             @NonNull
             @Override
@@ -127,13 +189,51 @@ public class TeamSelectionActivity extends AppCompatActivity {
                 holder.playerName.setText(model.getPlayerName());
                 holder.playerCategory.setText(model.getPlayerCategory());
                 holder.playerCredits.setText(model.getPlayerCredits());
+                total_players_B+=1;
+
+                TextView points_ref = (TextView)findViewById(R.id.textView6);
+                points_ref.setText(total_points+"/100");
+
+                TextView teamB_ref = (TextView)findViewById(R.id.textView4);
+                teamB_ref.setText(teamB_count+"/"+total_players_B);
 
                 Picasso.get().load(model.getPlayerImage()).placeholder(R.drawable.cricket_logo_remastered).into(holder.playerImage);
+
+                final int[] cardArray = new int[100];
 
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(TeamSelectionActivity.this, "Card is selected", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(TeamSelectionActivity.this, position+"Card is selected", Toast.LENGTH_SHORT).show();
+                        cardArray[position]+=1;
+
+                        if (cardArray[position]%2!=0) {
+                            color_ref_2 = "#000000";
+                            color_text_ref_2 = "#000000";
+                            total_points += Integer.parseInt(holder.playerCredits.getText().toString());
+                            teamB_count+=1;
+
+                            //holder.layout_ref.setBackgroundColor(Color.parseColor("#ffffff"));
+                        }
+                        else{
+                            color_ref_2 = "#ffffff";
+                            color_text_ref_2 = "#ffffff";
+                            total_points-=Integer.parseInt(holder.playerCredits.getText().toString());
+                            teamB_count-=1;
+                        }
+
+
+                        holder.playerCredits.setTextColor(Color.parseColor(color_text_ref_2));
+                        holder.itemView.setBackgroundColor(Color.parseColor(color_ref_2));
+                        holder.playerCategory.setTextColor(Color.parseColor(color_text_ref_2));
+
+                        TextView points_ref = (TextView)findViewById(R.id.textView6);
+                        points_ref.setText(total_points+"/100");
+
+
+                        TextView teamB_ref = (TextView)findViewById(R.id.textView4);
+                        teamB_ref.setText(teamB_count+"/"+total_players_B);
+
 //                        String match_id = getRef(position).getKey();
 
 //                        Intent matchIntent = new Intent(Sports.this, TeamSelectionActivity.class);
@@ -162,12 +262,14 @@ public class TeamSelectionActivity extends AppCompatActivity {
     }
     public static class TeamViewHolder extends RecyclerView.ViewHolder{
 
+        //LinearLayout layout_ref;
         TextView playerName, playerTeam, playerCategory, playerCredits;
         ImageView playerImage;
 
         public TeamViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            //layout_ref = (LinearLayout)itemView.findViewById(R.id.team_1_lin_layout);
             playerName = itemView.findViewById(R.id.playerName);
             playerCategory = itemView.findViewById(R.id.playerCategory);
             playerCredits = itemView.findViewById(R.id.playerCredits);
