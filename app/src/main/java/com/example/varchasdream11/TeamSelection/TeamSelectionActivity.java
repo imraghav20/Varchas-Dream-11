@@ -14,6 +14,7 @@ import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -54,6 +55,9 @@ public class TeamSelectionActivity extends AppCompatActivity {
     public  String color_text_ref_2;
     public int total_players_A = 0;
     public int total_players_B = 0;
+    public int curr_cardA_points = 0;
+    public int curr_cardB_points = 0;
+    public Button ProceedButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -109,6 +113,8 @@ public class TeamSelectionActivity extends AppCompatActivity {
                 holder.playerCredits.setText(model.getPlayerCredits());
                 total_players_A+=1;
 
+                ProceedButton = findViewById(R.id.proceedBtn);
+
                 TextView points_ref = (TextView)findViewById(R.id.textView6);
                 points_ref.setText(total_points+"/100");
 
@@ -131,22 +137,22 @@ public class TeamSelectionActivity extends AppCompatActivity {
                                 color_ref = "#ffffff";
                                 color_text_ref = "#ffffff";
 //                              teamA_count += 1;
-
-                                if (teamA_count<7 && teamA_count<(11-teamB_count)) {
+                                curr_cardA_points = Integer.parseInt(holder.playerCredits.getText().toString());
+                                if (teamA_count<7 && teamA_count<(11-teamB_count) && (total_points+curr_cardA_points)<=100) {
                                     cardArray[position] += 1;
                                     if ((cardArray[position] % 2 != 0)) {
                                         //Toast.makeText(TeamSelectionActivity.this, "if tap", Toast.LENGTH_SHORT).show();
                                         teamA_count+=1;
                                         color_ref = "#000000";
                                         color_text_ref = "#000000";
-                                        total_points += Integer.parseInt(holder.playerCredits.getText().toString());
+                                        total_points += curr_cardA_points;
                                         //holder.layout_ref.setBackgroundColor(Color.parseColor("#ffffff"));
                                     } else {
                                         //Toast.makeText(TeamSelectionActivity.this, "else tap", Toast.LENGTH_SHORT).show();
                                         teamA_count -= 1;
                                         color_ref = "#ffffff";
                                         color_text_ref = "#ffffff";
-                                        total_points -= Integer.parseInt(holder.playerCredits.getText().toString());
+                                        total_points -= curr_cardA_points;
 
                                     }
                                 }
@@ -158,10 +164,14 @@ public class TeamSelectionActivity extends AppCompatActivity {
                                         teamA_count -= 1;
                                         color_ref = "#ffffff";
                                         color_text_ref = "#ffffff";
-                                        total_points -= Integer.parseInt(holder.playerCredits.getText().toString());
+                                        total_points -= curr_cardA_points;
                                     }
                                     else{
-                                        if (teamB_count+teamA_count==11){
+                                        if (total_points+curr_cardA_points>100){
+                                            Toast.makeText(TeamSelectionActivity.this, "Cannot spend more than 100 credits !", Toast.LENGTH_SHORT).show();
+                                        }
+                                        else if (teamB_count+teamA_count==11){
+
                                             Toast.makeText(TeamSelectionActivity.this, "Maximum 11 players overall only", Toast.LENGTH_SHORT).show();
                                         }
                                         else if(teamA_count==7 || teamB_count==7){
@@ -181,8 +191,11 @@ public class TeamSelectionActivity extends AppCompatActivity {
                                 TextView teamA_ref = (TextView) findViewById(R.id.textView3);
                                 teamA_ref.setText(teamA_count + "/" + total_players_A);
 
+                                ProceedButton.setEnabled(false);
 
-
+                                if (teamA_count+teamB_count==11){
+                                    ProceedButton.setEnabled(true);
+                                }
 
                         }
 
@@ -208,6 +221,8 @@ public class TeamSelectionActivity extends AppCompatActivity {
                 holder.playerCredits.setText(model.getPlayerCredits());
                 total_players_B+=1;
 
+                ProceedButton = findViewById(R.id.proceedBtn);
+
                 TextView points_ref = (TextView)findViewById(R.id.textView6);
                 points_ref.setText(total_points+"/100");
 
@@ -226,22 +241,22 @@ public class TeamSelectionActivity extends AppCompatActivity {
                         color_ref_2 = "#ffffff";
                         color_text_ref_2 = "#ffffff";
 //                              teamA_count += 1;
-
-                        if (teamB_count<7 && teamB_count<(11-teamA_count)) {
+                        curr_cardB_points = Integer.parseInt(holder.playerCredits.getText().toString());
+                        if (teamB_count<7 && teamB_count<(11-teamA_count) && (total_points+curr_cardB_points)<=100) {
                             cardArray[position] += 1;
                             if ((cardArray[position] % 2 != 0)) {
                                 //Toast.makeText(TeamSelectionActivity.this, "if tap", Toast.LENGTH_SHORT).show();
                                 teamB_count+=1;
                                 color_ref_2 = "#000000";
                                 color_text_ref_2 = "#000000";
-                                total_points += Integer.parseInt(holder.playerCredits.getText().toString());
+                                total_points += curr_cardB_points;
                                 //holder.layout_ref.setBackgroundColor(Color.parseColor("#ffffff"));
                             } else {
                                 //Toast.makeText(TeamSelectionActivity.this, "else tap", Toast.LENGTH_SHORT).show();
                                 teamB_count -= 1;
                                 color_ref_2 = "#ffffff";
                                 color_text_ref_2 = "#ffffff";
-                                total_points -= Integer.parseInt(holder.playerCredits.getText().toString());
+                                total_points -= curr_cardB_points;
 
                             }
                         }
@@ -253,13 +268,17 @@ public class TeamSelectionActivity extends AppCompatActivity {
                                 teamB_count -= 1;
                                 color_ref_2 = "#ffffff";
                                 color_text_ref_2 = "#ffffff";
-                                total_points -= Integer.parseInt(holder.playerCredits.getText().toString());
+                                total_points -= curr_cardB_points;
                             }
                             else{
-                                if (teamB_count+teamA_count==11){
+                                if (total_points+curr_cardB_points>100){
+                                    Toast.makeText(TeamSelectionActivity.this, "Cannot spend more than 100 credits !", Toast.LENGTH_SHORT).show();
+                                }
+                                else if (teamB_count+teamA_count==11){
                                     Toast.makeText(TeamSelectionActivity.this, "Maximum 11 players overall only", Toast.LENGTH_SHORT).show();
                                 }
                                 else if(teamA_count==7 || teamB_count==7){
+
                                     Toast.makeText(TeamSelectionActivity.this, "Maximum 7 from a single team", Toast.LENGTH_SHORT).show();
                                 }
                             }
@@ -277,7 +296,12 @@ public class TeamSelectionActivity extends AppCompatActivity {
                         TextView teamB_ref = (TextView)findViewById(R.id.textView4);
                         teamB_ref.setText(teamB_count+"/"+total_players_B);
 
+                        ProceedButton.setEnabled(false);
 
+                        if (teamA_count+teamB_count==11){
+
+                            ProceedButton.setEnabled(true);
+                        }
 
                     }
                 });
