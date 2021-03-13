@@ -2,16 +2,24 @@ package com.example.varchasdream11.TeamSelection;
 
 public class Team {
 
-    public String playerName, playerImage, playerCategory, playerCredits;
+    public String playerName, playerImage, playerCategory, playerCredits, playerID;
+
+    public Team(String playerName, String playerImage, String playerCategory, String playerCredits, String playerID) {
+        this.playerName = playerName;
+        this.playerImage = playerImage;
+        this.playerCategory = playerCategory;
+        this.playerCredits = playerCredits;
+        this.playerID = playerID;
+    }
 
     public Team(){}
 
-    public Team(String playerName, String playerImage, String playerCategory, String playerCredits) {
-        this.playerName = playerName;
-        this.playerImage = playerImage;
+    public String getPlayerID() {
+        return playerID;
+    }
 
-        this.playerCategory = playerCategory;
-        this.playerCredits = playerCredits;
+    public void setPlayerID(String playerID) {
+        this.playerID = playerID;
     }
 
     public String getPlayerName() {
