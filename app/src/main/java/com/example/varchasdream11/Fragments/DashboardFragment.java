@@ -1,5 +1,6 @@
 package com.example.varchasdream11.Fragments;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -13,7 +14,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.varchasdream11.MainActivity;
+import com.example.varchasdream11.Matches.Sports;
 import com.example.varchasdream11.R;
+import com.example.varchasdream11.SignInActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.squareup.picasso.Picasso;
@@ -84,6 +88,10 @@ public class DashboardFragment extends Fragment {
             TextView mailid = (TextView) root.findViewById(R.id.etEmail);
             mailid.setText(email);
             Picasso.get().load(photoUrl).into((ImageView) root.findViewById(R.id.dashboardCardImg));
+        }
+        else{
+            Intent intent = new Intent(getActivity(), SignInActivity.class);
+            startActivity(intent);
         }
         return root;
     }

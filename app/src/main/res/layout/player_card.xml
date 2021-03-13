@@ -15,6 +15,7 @@
         app:cardCornerRadius="5dp">
 
         <LinearLayout
+            android:id="@+id/team_1_lin_layout"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:background="#009688"
