@@ -36,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new DashboardFragment()).commit();
 
         auth = FirebaseAuth.getInstance();
+
+
     }
 
     @Override
@@ -70,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
             // By using switch we can easily get
             // the selected fragment
             // by using there id.
+
             Fragment selectedFragment = null;
             switch (item.getItemId()) {
                 case R.id.dashboard:
