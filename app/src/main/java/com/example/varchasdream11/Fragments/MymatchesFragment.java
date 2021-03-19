@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.example.varchasdream11.Matches.Match;
 import com.example.varchasdream11.Matches.Sports;
 import com.example.varchasdream11.R;
+import com.example.varchasdream11.TeamPreview.TeamPreviewActivity;
 import com.example.varchasdream11.TeamSelection.TeamSelectionActivity;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -115,6 +116,20 @@ public class MymatchesFragment extends Fragment {
                 Picasso.get().load(model.getTeamImage1()).placeholder(R.drawable.cricket_logo_remastered).into(holder.teamImage1);
                 Picasso.get().load(model.getTeamImage2()).placeholder(R.drawable.cricket_logo_remastered).into(holder.teamImage2);
 
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String match_id = getRef(position).getKey();
+
+                        Intent matchIntent = new Intent(getActivity(), TeamPreviewActivity.class);
+                        matchIntent.putExtra("match_id", match_id);
+                        matchIntent.putExtra("teamName1", model.getTeamName1());
+                        matchIntent.putExtra("teamName2", model.getTeamName2());
+                        startActivity(matchIntent);
+
+
+                    }
+                });
 
             }
 
@@ -124,6 +139,8 @@ public class MymatchesFragment extends Fragment {
                 View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.mymatches_sample, viewGroup, false);
                 return new MyMatchViewHolder(view);
             }
+
+
         };
 
         MyMatchesRecyclerList.setAdapter(adapter);
