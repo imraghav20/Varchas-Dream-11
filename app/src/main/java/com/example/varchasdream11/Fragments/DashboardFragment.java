@@ -6,16 +6,13 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.varchasdream11.MainActivity;
-import com.example.varchasdream11.Matches.Sports;
 import com.example.varchasdream11.R;
 import com.example.varchasdream11.SignInActivity;
 import com.google.firebase.auth.FirebaseAuth;
@@ -37,6 +34,10 @@ public class DashboardFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    public Button adminButton;
+    private Button dashboardButton;
+    String Admin1 = "68uWy2ZdfuOKNSmNWvwfYiUgFXF2";
+    String Admin2 = "fsGosgz47mSfZk6RbRA4JMSNTAV2";
 
     public DashboardFragment() {
         // Required empty public constructor
@@ -88,6 +89,38 @@ public class DashboardFragment extends Fragment {
             TextView mailid = (TextView) root.findViewById(R.id.etEmail);
             mailid.setText(email);
             Picasso.get().load(photoUrl).into((ImageView) root.findViewById(R.id.dashboardCardImg));
+            String curr_user = user.getUid();
+
+            if (curr_user.equals(Admin1) || curr_user.equals(Admin2)) { // Edit this line later for admin access
+
+               adminButton = root.findViewById(R.id.nuke_admin);
+               dashboardButton= root.findViewById(R.id.button_dashboard_nuska);
+               dashboardButton.setEnabled(true);
+               dashboardButton.setOnClickListener(new View.OnClickListener() {
+                   @Override
+                   public void onClick(View v) {
+                       adminButton.setEnabled(true);
+                       dashboardButton.setVisibility(View.INVISIBLE);
+                       adminButton.setVisibility(View.VISIBLE);
+
+//                       adminButton.setOnClickListener(new View.OnClickListener() {
+//                           @Override
+//                           public void onClick(View v) {
+//
+//                               Intent intent = new Intent(getActivity(), AdminActivity.class);
+//                               startActivity(intent);
+//
+//                           }
+//
+//                           ;
+//
+//                       });
+                   }
+               });
+
+
+           }
+
         }
         else{
             Intent intent = new Intent(getActivity(), SignInActivity.class);

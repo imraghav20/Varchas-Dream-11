@@ -2,32 +2,23 @@ package com.example.varchasdream11.TeamSelection;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
-import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.varchasdream11.Fragments.MymatchesFragment;
 import com.example.varchasdream11.MainActivity;
-import com.example.varchasdream11.Matches.Match;
-import com.example.varchasdream11.Matches.Sports;
 import com.example.varchasdream11.R;
-import com.example.varchasdream11.databinding.ActivitySportsBinding;
 import com.example.varchasdream11.databinding.ActivityTeamSelectionBinding;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -38,13 +29,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 public class TeamSelectionActivity extends AppCompatActivity {
     FirebaseAuth auth;
@@ -68,6 +55,10 @@ public class TeamSelectionActivity extends AppCompatActivity {
     public int curr_cardA_points = 0;
     public int curr_cardB_points = 0;
     public Button ProceedButton;
+
+    String Admin1 = "68uWy2ZdfuOKNSmNWvwfYiUgFXF2";
+    String Admin2 = "fsGosgz47mSfZk6RbRA4JMSNTAV2";
+
     List<Map<String, String>> myMap = new ArrayList<Map<String, String>>();
 
     @Override
@@ -88,6 +79,7 @@ public class TeamSelectionActivity extends AppCompatActivity {
 
         Team2RecyclerList = (RecyclerView) findViewById(R.id.team2RecyclerList);
         Team2RecyclerList.setLayoutManager(new LinearLayoutManager(this));
+
 
         TextView team1 = (TextView) findViewById(R.id.textView5);
         team1.setText(team1_name);
@@ -115,317 +107,428 @@ public class TeamSelectionActivity extends AppCompatActivity {
                 .setQuery(Team2Ref, Team.class)
                 .build();
 
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        final String curr_user = user.getUid();
 
-        final FirebaseRecyclerAdapter<Team, TeamViewHolder> adapter1 = new FirebaseRecyclerAdapter<Team, TeamViewHolder>(options1) {
-            @Override
-            protected void onBindViewHolder(@NonNull final TeamViewHolder holder, final int position, @NonNull final Team model) {
-                holder.playerName.setText(model.getPlayerName());
+        if (curr_user.equals(Admin1) || curr_user.equals(Admin2)) {
+
+            final FirebaseRecyclerAdapter<Team, TeamAdminViewHolder> adapter1 = new FirebaseRecyclerAdapter<Team, TeamAdminViewHolder>(options1) {
+                @Override
+                protected void onBindViewHolder(@NonNull final TeamAdminViewHolder holder, final int position, @NonNull final Team model) {
+                    holder.playerName.setText(model.getPlayerName());
+//                  holder.playerTeam.setText(model.getPlayerTeam());
+                    holder.playerCategory.setText(model.getPlayerCategory());
+//                  holder.playerScore.setText(model.getPlayerCredits());
+//                    Picasso.get().load(model.getPlayerImage()).placeholder(R.drawable.cricket_logo_remastered).into(holder.playerImage);
+
+
+                    holder.itemView.findViewById(R.id.update_admin).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            String new_score = holder.playerScore.getText().toString();
+                            FirebaseDatabase.getInstance().getReference().child("Players").child(team1_name).child("player"+model.playerID).child("playerScore").setValue(new_score);
+                            Toast.makeText(TeamSelectionActivity.this, "Updated on firebase", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+                    ProceedButton = findViewById(R.id.proceedBtn);
+                    ProceedButton.setEnabled(true);
+                    ProceedButton.setOnClickListener(new View.OnClickListener() {
+                        public void onClick(View view) {
+                            Toast.makeText(TeamSelectionActivity.this, "To be continued...", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+//                    Button UpdateButton = findViewById(R.id.update_admin);
+//                    UpdateButton.setOnClickListener(new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View v) {
+////                            String new_score = holder.playerScore.getText().toString();
+////                            FirebaseDatabase.getInstance().getReference().child("Players").child(team1_name).child(model.playerID).child("playerScore").setValue(new_score);
+////                            Toast.makeText(TeamSelectionActivity.this, "Updated on firebase", Toast.LENGTH_SHORT).show();
+//                        }
+//                    });
+                }
+
+                @NonNull
+                @Override
+                public TeamAdminViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+                    View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.player_card_admin, viewGroup, false);
+                    TeamAdminViewHolder viewHolder = new TeamAdminViewHolder(view);
+                    return viewHolder;
+                }
+            };
+
+            final FirebaseRecyclerAdapter<Team, TeamAdminViewHolder> adapter2 = new FirebaseRecyclerAdapter<Team, TeamAdminViewHolder>(options2) {
+                @Override
+                protected void onBindViewHolder(@NonNull final TeamAdminViewHolder holder, final int position, @NonNull final Team model) {
+                    holder.playerName.setText(model.getPlayerName());
+//                  holder.playerTeam.setText(model.getPlayerTeam());
+                    holder.playerCategory.setText(model.getPlayerCategory());
+//                  holder.playerScore.setText(model.getPlayerCredits());
+//                    Picasso.get().load(model.getPlayerImage()).placeholder(R.drawable.cricket_logo_remastered).into(holder.playerImage);
+
+
+                    holder.itemView.findViewById(R.id.update_admin).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            String new_score = holder.playerScore.getText().toString();
+                            FirebaseDatabase.getInstance().getReference().child("Players").child(team2_name).child("player"+model.playerID).child("playerScore").setValue(new_score);
+                            Toast.makeText(TeamSelectionActivity.this, "Updated on firebase", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+
+                    ProceedButton = findViewById(R.id.proceedBtn);
+                    ProceedButton.setEnabled(true);
+                    ProceedButton.setOnClickListener(new View.OnClickListener() {
+                        public void onClick(View view) {
+                            Toast.makeText(TeamSelectionActivity.this, "To be continued...", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+
+//                    Button UpdateButton = findViewById(R.id.update_admin);
+//                    UpdateButton.setOnClickListener(new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View v) {
+//                            String new_score = holder.playerScore.getText().toString();
+//                            FirebaseDatabase.getInstance().getReference().child("Players").child(team2_name).child(model.playerID).child("playerScore").setValue(new_score);
+//                            Toast.makeText(TeamSelectionActivity.this, "Updated on firebase", Toast.LENGTH_SHORT).show();
+//                        }
+//                    });
+                }
+
+                @NonNull
+                @Override
+                public TeamAdminViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+                    View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.player_card_admin, viewGroup, false);
+                    TeamAdminViewHolder viewHolder = new TeamAdminViewHolder(view);
+                    return viewHolder;
+                }
+            };
+
+            Team1RecyclerList.setAdapter(adapter1);
+            adapter1.startListening();
+
+            Team2RecyclerList.setAdapter(adapter2);
+            adapter2.startListening();
+
+        }
+        else {
+
+            final FirebaseRecyclerAdapter<Team, TeamViewHolder> adapter1 = new FirebaseRecyclerAdapter<Team, TeamViewHolder>(options1) {
+                @Override
+                protected void onBindViewHolder(@NonNull final TeamViewHolder holder, final int position, @NonNull final Team model) {
+                    holder.playerName.setText(model.getPlayerName());
 //              holder.playerTeam.setText(model.getPlayerTeam());
-                holder.playerCategory.setText(model.getPlayerCategory());
-                holder.playerCredits.setText(model.getPlayerCredits());
-                total_players_A += 1;
-
-                ProceedButton = findViewById(R.id.proceedBtn);
-
-                TextView points_ref = (TextView) findViewById(R.id.textView6);
-                points_ref.setText(total_points + "/100");
-
-                TextView teamA_ref = (TextView) findViewById(R.id.textView3);
-                teamA_ref.setText(teamB_count + "/" + total_players_A);
-
-                final int[] cardArray = new int[100];
-                Picasso.get().load(model.getPlayerImage()).placeholder(R.drawable.cricket_logo_remastered).into(holder.playerImage);
+                    holder.playerCategory.setText(model.getPlayerCategory());
+                    holder.playerCredits.setText(model.getPlayerCredits());
+                    total_players_A += 1;
 
 
-                holder.itemView.setOnClickListener(new View.OnClickListener() {
 
-                    @SuppressLint("SetTextI18n")
-                    @Override
+                    TextView points_ref = (TextView) findViewById(R.id.textView6);
+                    points_ref.setText(total_points + "/100");
 
-                    public void onClick(View v) {
-                        //Toast.makeText(TeamSelectionActivity.this, position+"Card is selected", Toast.LENGTH_SHORT).show();
+                    TextView teamA_ref = (TextView) findViewById(R.id.textView3);
+                    teamA_ref.setText(teamB_count + "/" + total_players_A);
 
-                        color_ref = "#ffffff";
-                        color_text_ref = "#ffffff";
+                    final int[] cardArray = new int[100];
+                    Picasso.get().load(model.getPlayerImage()).placeholder(R.drawable.cricket_logo_remastered).into(holder.playerImage);
+
+
+                    holder.itemView.setOnClickListener(new View.OnClickListener() {
+
+                        @SuppressLint("SetTextI18n")
+                        @Override
+
+                        public void onClick(View v) {
+                            //Toast.makeText(TeamSelectionActivity.this, position+"Card is selected", Toast.LENGTH_SHORT).show();
+
+                            color_ref = "#ffffff";
+                            color_text_ref = "#ffffff";
 //                              teamA_count += 1;
-                        curr_cardA_points = Integer.parseInt(holder.playerCredits.getText().toString());
-                        if (teamA_count < 7 && teamA_count < (11 - teamB_count) && (total_points + curr_cardA_points) <= 100) {
-                            cardArray[position] += 1;
-                            if ((cardArray[position] % 2 != 0)) {
-                                //Toast.makeText(TeamSelectionActivity.this, "if tap", Toast.LENGTH_SHORT).show();
-                                teamA_count += 1;
-                                color_ref = "#000000";
-                                color_text_ref = "#000000";
-                                total_points += curr_cardA_points;
-                                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                            curr_cardA_points = Integer.parseInt(holder.playerCredits.getText().toString());
+                            if (teamA_count < 7 && teamA_count < (11 - teamB_count) && (total_points + curr_cardA_points) <= 100) {
+                                cardArray[position] += 1;
+                                if ((cardArray[position] % 2 != 0)) {
+                                    //Toast.makeText(TeamSelectionActivity.this, "if tap", Toast.LENGTH_SHORT).show();
+                                    teamA_count += 1;
+                                    color_ref = "#000000";
+                                    color_text_ref = "#000000";
+                                    total_points += curr_cardA_points;
+                                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-                                Map<String, String> myMap1 = new HashMap<String, String>();
-                                myMap1.put("playerName", model.getPlayerName());
-                                myMap1.put("playerCategory", model.getPlayerCategory());
-                                myMap1.put("playerCredits", model.getPlayerCredits());
-                                myMap1.put("playerID", team1_name + model.getPlayerID());
-                                myMap.add(myMap1);
+                                    Map<String, String> myMap1 = new HashMap<String, String>();
+                                    myMap1.put("playerName", model.getPlayerName());
+                                    myMap1.put("playerCategory", model.getPlayerCategory());
+                                    myMap1.put("playerCredits", model.getPlayerCredits());
+                                    myMap1.put("playerID", team1_name + model.getPlayerID());
+                                    myMap.add(myMap1);
 //                                        FirebaseDatabase.getInstance().getReference().child("Users").child(user.getUid()).child(team1_name +"vs"+team2_name).child(team1_name+model.getPlayerID()).child("playerName").setValue(model.getPlayerName());
 //                                        FirebaseDatabase.getInstance().getReference().child("Users").child(user.getUid()).child(team1_name +"vs"+team2_name).child(team1_name+model.getPlayerID()).child("playerCategory").setValue(model.getPlayerCategory());
 //                                        FirebaseDatabase.getInstance().getReference().child("Users").child(user.getUid()).child(team1_name +"vs"+team2_name).child(team1_name+model.getPlayerID()).child("playerCredits").setValue(model.getPlayerCredits());
 //                                        //holder.layout_ref.setBackgroundColor(Color.parseColor("#ffffff"));
-                            } else {
-                                //Toast.makeText(TeamSelectionActivity.this, "else tap", Toast.LENGTH_SHORT).show();
-                                teamA_count -= 1;
-                                color_ref = "#ffffff";
-                                color_text_ref = "#ffffff";
-                                total_points -= curr_cardA_points;
-                                Map<String, String> myMap1 = new HashMap<String, String>();
-                                myMap1.put("playerName", model.getPlayerName());
-                                myMap1.put("playerCategory", model.getPlayerCategory());
-                                myMap1.put("playerCredits", model.getPlayerCredits());
-                                myMap1.put("playerID", team1_name + model.getPlayerID());
-                                myMap.remove(myMap1);
+                                } else {
+                                    //Toast.makeText(TeamSelectionActivity.this, "else tap", Toast.LENGTH_SHORT).show();
+                                    teamA_count -= 1;
+                                    color_ref = "#ffffff";
+                                    color_text_ref = "#ffffff";
+                                    total_points -= curr_cardA_points;
+                                    Map<String, String> myMap1 = new HashMap<String, String>();
+                                    myMap1.put("playerName", model.getPlayerName());
+                                    myMap1.put("playerCategory", model.getPlayerCategory());
+                                    myMap1.put("playerCredits", model.getPlayerCredits());
+                                    myMap1.put("playerID", team1_name + model.getPlayerID());
+                                    myMap.remove(myMap1);
 
 //                                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 //                                        int x=teamA_count+teamB_count;
 //                                        FirebaseDatabase.getInstance().getReference().child("Users").child(user.getUid()).child(team1_name +"vs"+team2_name).child(team1_name+model.getPlayerID()).removeValue();
 
 
-                            }
-                        } else {
-
-                            if ((cardArray[position] % 2 != 0)) {
-                                //Toast.makeText(TeamSelectionActivity.this, "final", Toast.LENGTH_SHORT).show();
-                                cardArray[position] += 1;
-                                teamA_count -= 1;
-                                color_ref = "#ffffff";
-                                color_text_ref = "#ffffff";
-                                total_points -= curr_cardA_points;
-                                Map<String, String> myMap1 = new HashMap<String, String>();
-                                myMap1.put("playerName", model.getPlayerName());
-                                myMap1.put("playerCategory", model.getPlayerCategory());
-                                myMap1.put("playerCredits", model.getPlayerCredits());
-                                myMap1.put("playerID", team1_name + model.getPlayerID());
-                                myMap.remove(myMap1);
-                            } else {
-                                if (total_points + curr_cardA_points > 100) {
-                                    Toast.makeText(TeamSelectionActivity.this, "Cannot spend more than 100 credits !", Toast.LENGTH_SHORT).show();
-                                } else if (teamB_count + teamA_count == 11) {
-
-                                    Toast.makeText(TeamSelectionActivity.this, "Maximum 11 players overall only", Toast.LENGTH_SHORT).show();
-                                } else if (teamA_count == 7 || teamB_count == 7) {
-                                    Toast.makeText(TeamSelectionActivity.this, "Maximum 7 from a single team", Toast.LENGTH_SHORT).show();
                                 }
-                                // This comment was for the sake of pushing commit
-                            }
-                        }
+                            } else {
 
-                        holder.playerCredits.setTextColor(Color.parseColor(color_text_ref));
-                        holder.itemView.setBackgroundColor(Color.parseColor(color_ref));
-                        holder.playerCategory.setTextColor(Color.parseColor(color_text_ref));
+                                if ((cardArray[position] % 2 != 0)) {
+                                    //Toast.makeText(TeamSelectionActivity.this, "final", Toast.LENGTH_SHORT).show();
+                                    cardArray[position] += 1;
+                                    teamA_count -= 1;
+                                    color_ref = "#ffffff";
+                                    color_text_ref = "#ffffff";
+                                    total_points -= curr_cardA_points;
+                                    Map<String, String> myMap1 = new HashMap<String, String>();
+                                    myMap1.put("playerName", model.getPlayerName());
+                                    myMap1.put("playerCategory", model.getPlayerCategory());
+                                    myMap1.put("playerCredits", model.getPlayerCredits());
+                                    myMap1.put("playerID", team1_name + model.getPlayerID());
+                                    myMap.remove(myMap1);
+                                } else {
+                                    if (total_points + curr_cardA_points > 100) {
+                                        Toast.makeText(TeamSelectionActivity.this, "Cannot spend more than 100 credits !", Toast.LENGTH_SHORT).show();
+                                    } else if (teamB_count + teamA_count == 11) {
 
-                        TextView points_ref = (TextView) findViewById(R.id.textView6);
-                        points_ref.setText(total_points + "/100");
-
-                        TextView teamA_ref = (TextView) findViewById(R.id.textView3);
-                        teamA_ref.setText(teamA_count + "/" + total_players_A);
-
-                        ProceedButton.setEnabled(false);
-
-                        if (teamA_count + teamB_count == 11) {
-                            ProceedButton.setEnabled(true);
-                            ProceedButton.setOnClickListener(new View.OnClickListener() {
-                                public void onClick(View view) {
-                                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-                                    for (int i = 0; i < myMap.size(); i++) {
-                                        Map<String, String> inner = myMap.get(i);
-                                        for (Map.Entry<String, String> entry : inner.entrySet()) {
-                                            FirebaseDatabase.getInstance().getReference().child("Users").child(user.getUid()).child(team1_name + "vs" + team2_name).child(inner.get("playerID")).child(entry.getKey()).setValue(entry.getValue());
-                                            ;
-                                        }
+                                        Toast.makeText(TeamSelectionActivity.this, "Maximum 11 players overall only", Toast.LENGTH_SHORT).show();
+                                    } else if (teamA_count == 7 || teamB_count == 7) {
+                                        Toast.makeText(TeamSelectionActivity.this, "Maximum 7 from a single team", Toast.LENGTH_SHORT).show();
                                     }
-                                    FirebaseDatabase.getInstance().getReference().child("User matches").child(user.getUid()).child(team1_name + "vs" + team2_name).child("teamName1").setValue(team1_name);
-                                    FirebaseDatabase.getInstance().getReference().child("User matches").child(user.getUid()).child(team1_name + "vs" + team2_name).child("teamName2").setValue(team2_name);
+                                    // This comment was for the sake of pushing commit
+                                }
+                            }
+
+                            holder.playerCredits.setTextColor(Color.parseColor(color_text_ref));
+                            holder.itemView.setBackgroundColor(Color.parseColor(color_ref));
+                            holder.playerCategory.setTextColor(Color.parseColor(color_text_ref));
+
+                            TextView points_ref = (TextView) findViewById(R.id.textView6);
+                            points_ref.setText(total_points + "/100");
+
+                            TextView teamA_ref = (TextView) findViewById(R.id.textView3);
+                            teamA_ref.setText(teamA_count + "/" + total_players_A);
+
+                            ProceedButton.setEnabled(false);
+
+                            if (teamA_count + teamB_count == 11) {
+                                ProceedButton.setEnabled(true);
+                                ProceedButton.setOnClickListener(new View.OnClickListener() {
+                                    public void onClick(View view) {
+                                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+                                        for (int i = 0; i < myMap.size(); i++) {
+                                            Map<String, String> inner = myMap.get(i);
+                                            for (Map.Entry<String, String> entry : inner.entrySet()) {
+                                                FirebaseDatabase.getInstance().getReference().child("Users").child(user.getUid()).child(team1_name + "vs" + team2_name).child(inner.get("playerID")).child(entry.getKey()).setValue(entry.getValue());
+                                                ;
+                                            }
+                                        }
+                                        FirebaseDatabase.getInstance().getReference().child("User matches").child(user.getUid()).child(team1_name + "vs" + team2_name).child("teamName1").setValue(team1_name);
+                                        FirebaseDatabase.getInstance().getReference().child("User matches").child(user.getUid()).child(team1_name + "vs" + team2_name).child("teamName2").setValue(team2_name);
 
 //
-                                    Intent intent = new Intent(TeamSelectionActivity.this, MainActivity.class);
-                                    startActivity(intent);
+                                        Intent intent = new Intent(TeamSelectionActivity.this, MainActivity.class);
+                                        startActivity(intent);
 
-                                }
-                            });
+                                    }
+                                });
+                            }
+
                         }
 
-                    }
-
-                });
-            }
+                    });
+                }
 
 
-            @NonNull
-            @Override
-            public TeamViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
-                View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.player_card1, viewGroup, false);
-                TeamViewHolder viewHolder = new TeamViewHolder(view);
-                return viewHolder;
-            }
-        };
+                @NonNull
+                @Override
+                public TeamViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+                    View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.player_card1, viewGroup, false);
+                    TeamViewHolder viewHolder = new TeamViewHolder(view);
+                    return viewHolder;
+                }
+            };
 
-        FirebaseRecyclerAdapter<Team, TeamViewHolder> adapter2 = new FirebaseRecyclerAdapter<Team, TeamViewHolder>(options2) {
-            @Override
-            protected void onBindViewHolder(@NonNull final TeamViewHolder holder, final int position, @NonNull final Team model) {
-                holder.playerName.setText(model.getPlayerName());
-                holder.playerCategory.setText(model.getPlayerCategory());
-                holder.playerCredits.setText(model.getPlayerCredits());
-                total_players_B += 1;
+            FirebaseRecyclerAdapter<Team, TeamViewHolder> adapter2 = new FirebaseRecyclerAdapter<Team, TeamViewHolder>(options2) {
+                @Override
+                protected void onBindViewHolder(@NonNull final TeamViewHolder holder, final int position, @NonNull final Team model) {
+                    holder.playerName.setText(model.getPlayerName());
+                    holder.playerCategory.setText(model.getPlayerCategory());
+                    holder.playerCredits.setText(model.getPlayerCredits());
+                    total_players_B += 1;
 
-                ProceedButton = findViewById(R.id.proceedBtn);
+                    ProceedButton = findViewById(R.id.proceedBtn);
 
-                TextView points_ref = (TextView) findViewById(R.id.textView6);
-                points_ref.setText(total_points + "/100");
+                    TextView points_ref = (TextView) findViewById(R.id.textView6);
+                    points_ref.setText(total_points + "/100");
 
-                TextView teamB_ref = (TextView) findViewById(R.id.textView4);
-                teamB_ref.setText(teamB_count + "/" + total_players_B);
+                    TextView teamB_ref = (TextView) findViewById(R.id.textView4);
+                    teamB_ref.setText(teamB_count + "/" + total_players_B);
 
-                Picasso.get().load(model.getPlayerImage()).placeholder(R.drawable.cricket_logo_remastered).into(holder.playerImage);
+                    Picasso.get().load(model.getPlayerImage()).placeholder(R.drawable.cricket_logo_remastered).into(holder.playerImage);
 
-                final int[] cardArray = new int[100];
+                    final int[] cardArray = new int[100];
 
-                holder.itemView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        //Toast.makeText(TeamSelectionActivity.this, position+"Card is selected", Toast.LENGTH_SHORT).show();
+                    holder.itemView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            //Toast.makeText(TeamSelectionActivity.this, position+"Card is selected", Toast.LENGTH_SHORT).show();
 
-                        color_ref_2 = "#ffffff";
-                        color_text_ref_2 = "#ffffff";
+                            color_ref_2 = "#ffffff";
+                            color_text_ref_2 = "#ffffff";
 //                              teamA_count += 1;
-                        curr_cardB_points = Integer.parseInt(holder.playerCredits.getText().toString());
-                        if (teamB_count < 7 && teamB_count < (11 - teamA_count) && (total_points + curr_cardB_points) <= 100) {
-                            cardArray[position] += 1;
-                            if ((cardArray[position] % 2 != 0)) {
-                                //Toast.makeText(TeamSelectionActivity.this, "if tap", Toast.LENGTH_SHORT).show();
-                                teamB_count += 1;
-                                color_ref_2 = "#000000";
-                                color_text_ref_2 = "#000000";
-                                total_points += curr_cardB_points;
+                            curr_cardB_points = Integer.parseInt(holder.playerCredits.getText().toString());
+                            if (teamB_count < 7 && teamB_count < (11 - teamA_count) && (total_points + curr_cardB_points) <= 100) {
+                                cardArray[position] += 1;
+                                if ((cardArray[position] % 2 != 0)) {
+                                    //Toast.makeText(TeamSelectionActivity.this, "if tap", Toast.LENGTH_SHORT).show();
+                                    teamB_count += 1;
+                                    color_ref_2 = "#000000";
+                                    color_text_ref_2 = "#000000";
+                                    total_points += curr_cardB_points;
 
-                                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-                                Map<String, String> myMap1 = new HashMap<String, String>();
-                                myMap1.put("playerName", model.getPlayerName());
-                                myMap1.put("playerCategory", model.getPlayerCategory());
-                                myMap1.put("playerCredits", model.getPlayerCredits());
-                                myMap1.put("playerID", team2_name + model.getPlayerID());
+                                    Map<String, String> myMap1 = new HashMap<String, String>();
+                                    myMap1.put("playerName", model.getPlayerName());
+                                    myMap1.put("playerCategory", model.getPlayerCategory());
+                                    myMap1.put("playerCredits", model.getPlayerCredits());
+                                    myMap1.put("playerID", team2_name + model.getPlayerID());
 
-                                myMap.add(myMap1);
+                                    myMap.add(myMap1);
 //                                FirebaseDatabase.getInstance().getReference().child("Users").child(user.getUid()).child(team1_name +"vs"+team2_name).child(team2_name+model.getPlayerID()).child("playerName").setValue(model.getPlayerName());
 //                                FirebaseDatabase.getInstance().getReference().child("Users").child(user.getUid()).child(team1_name +"vs"+team2_name).child(team2_name+model.getPlayerID()).child("playerCategory").setValue(model.getPlayerCategory());
 //                                FirebaseDatabase.getInstance().getReference().child("Users").child(user.getUid()).child(team1_name +"vs"+team2_name).child(team2_name+model.getPlayerID()).child("playerCredits").setValue(model.getPlayerCredits());
 
-                                //holder.layout_ref.setBackgroundColor(Color.parseColor("#ffffff"));
-                            } else {
-                                //Toast.makeText(TeamSelectionActivity.this, "else tap", Toast.LENGTH_SHORT).show();
-                                teamB_count -= 1;
-                                color_ref_2 = "#ffffff";
-                                color_text_ref_2 = "#ffffff";
-                                total_points -= curr_cardB_points;
-                                Map<String, String> myMap1 = new HashMap<String, String>();
-                                myMap1.put("playerName", model.getPlayerName());
-                                myMap1.put("playerCategory", model.getPlayerCategory());
-                                myMap1.put("playerCredits", model.getPlayerCredits());
-                                myMap1.put("playerID", team1_name + model.getPlayerID());
-                                myMap.remove(myMap1);
+                                    //holder.layout_ref.setBackgroundColor(Color.parseColor("#ffffff"));
+                                } else {
+                                    //Toast.makeText(TeamSelectionActivity.this, "else tap", Toast.LENGTH_SHORT).show();
+                                    teamB_count -= 1;
+                                    color_ref_2 = "#ffffff";
+                                    color_text_ref_2 = "#ffffff";
+                                    total_points -= curr_cardB_points;
+                                    Map<String, String> myMap1 = new HashMap<String, String>();
+                                    myMap1.put("playerName", model.getPlayerName());
+                                    myMap1.put("playerCategory", model.getPlayerCategory());
+                                    myMap1.put("playerCredits", model.getPlayerCredits());
+                                    myMap1.put("playerID", team1_name + model.getPlayerID());
+                                    myMap.remove(myMap1);
 
 //                                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 //                                int x=teamA_count+teamB_count;
 //                                FirebaseDatabase.getInstance().getReference().child("Users").child(user.getUid()).child(team1_name +"vs"+team2_name).child(team2_name+model.getPlayerID()).removeValue();
 //
 
-                            }
-                        } else {
+                                }
+                            } else {
 
-                            if ((cardArray[position] % 2 != 0)) {
-                                //Toast.makeText(TeamSelectionActivity.this, "final", Toast.LENGTH_SHORT).show();
-                                cardArray[position] += 1;
-                                teamB_count -= 1;
-                                color_ref_2 = "#ffffff";
-                                color_text_ref_2 = "#ffffff";
-                                total_points -= curr_cardB_points;
-                                Map<String, String> myMap1 = new HashMap<String, String>();
-                                myMap1.put("playerName", model.getPlayerName());
-                                myMap1.put("playerCategory", model.getPlayerCategory());
-                                myMap1.put("playerCredits", model.getPlayerCredits());
-                                myMap1.put("playerID", team1_name + model.getPlayerID());
-                                myMap.remove(myMap1);
+                                if ((cardArray[position] % 2 != 0)) {
+                                    //Toast.makeText(TeamSelectionActivity.this, "final", Toast.LENGTH_SHORT).show();
+                                    cardArray[position] += 1;
+                                    teamB_count -= 1;
+                                    color_ref_2 = "#ffffff";
+                                    color_text_ref_2 = "#ffffff";
+                                    total_points -= curr_cardB_points;
+                                    Map<String, String> myMap1 = new HashMap<String, String>();
+                                    myMap1.put("playerName", model.getPlayerName());
+                                    myMap1.put("playerCategory", model.getPlayerCategory());
+                                    myMap1.put("playerCredits", model.getPlayerCredits());
+                                    myMap1.put("playerID", team1_name + model.getPlayerID());
+                                    myMap.remove(myMap1);
 
 //                                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 //                                int x=teamA_count+teamB_count;
 //                                FirebaseDatabase.getInstance().getReference().child("Users").child(user.getUid()).child(team1_name +"vs"+team2_name).child(team2_name+model.getPlayerID()).removeValue();
 
-                            } else {
-                                if (total_points + curr_cardB_points > 100) {
-                                    Toast.makeText(TeamSelectionActivity.this, "Cannot spend more than 100 credits !", Toast.LENGTH_SHORT).show();
-                                } else if (teamB_count + teamA_count == 11) {
-                                    Toast.makeText(TeamSelectionActivity.this, "Maximum 11 players overall only", Toast.LENGTH_SHORT).show();
-                                } else if (teamA_count == 7 || teamB_count == 7) {
+                                } else {
+                                    if (total_points + curr_cardB_points > 100) {
+                                        Toast.makeText(TeamSelectionActivity.this, "Cannot spend more than 100 credits !", Toast.LENGTH_SHORT).show();
+                                    } else if (teamB_count + teamA_count == 11) {
+                                        Toast.makeText(TeamSelectionActivity.this, "Maximum 11 players overall only", Toast.LENGTH_SHORT).show();
+                                    } else if (teamA_count == 7 || teamB_count == 7) {
 
-                                    Toast.makeText(TeamSelectionActivity.this, "Maximum 7 from a single team", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(TeamSelectionActivity.this, "Maximum 7 from a single team", Toast.LENGTH_SHORT).show();
+                                    }
                                 }
                             }
-                        }
 
 
-                        holder.playerCredits.setTextColor(Color.parseColor(color_text_ref_2));
-                        holder.itemView.setBackgroundColor(Color.parseColor(color_ref_2));
-                        holder.playerCategory.setTextColor(Color.parseColor(color_text_ref_2));
+                            holder.playerCredits.setTextColor(Color.parseColor(color_text_ref_2));
+                            holder.itemView.setBackgroundColor(Color.parseColor(color_ref_2));
+                            holder.playerCategory.setTextColor(Color.parseColor(color_text_ref_2));
 
-                        TextView points_ref = (TextView) findViewById(R.id.textView6);
-                        points_ref.setText(total_points + "/100");
+                            TextView points_ref = (TextView) findViewById(R.id.textView6);
+                            points_ref.setText(total_points + "/100");
 
 
-                        TextView teamB_ref = (TextView) findViewById(R.id.textView4);
-                        teamB_ref.setText(teamB_count + "/" + total_players_B);
+                            TextView teamB_ref = (TextView) findViewById(R.id.textView4);
+                            teamB_ref.setText(teamB_count + "/" + total_players_B);
 
-                        ProceedButton.setEnabled(false);
+                            ProceedButton.setEnabled(false);
 
-                        if (teamA_count + teamB_count == 11) {
+                            if (teamA_count + teamB_count == 11) {
 
-                            ProceedButton.setEnabled(true);
-                            ProceedButton.setOnClickListener(new View.OnClickListener() {
-                                public void onClick(View v) {
-                                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                                    for (int i = 0; i < myMap.size(); i++) {
-                                        Map<String, String> inner = myMap.get(i);
-                                        for (Map.Entry<String, String> entry : inner.entrySet()) {
+                                ProceedButton.setEnabled(true);
+                                ProceedButton.setOnClickListener(new View.OnClickListener() {
+                                    public void onClick(View v) {
+                                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                                        for (int i = 0; i < myMap.size(); i++) {
+                                            Map<String, String> inner = myMap.get(i);
+                                            for (Map.Entry<String, String> entry : inner.entrySet()) {
 
-                                            FirebaseDatabase.getInstance().getReference().child("Users").child(user.getUid()).child(team1_name + "vs" + team2_name).child(inner.get("playerID")).child(entry.getKey()).setValue(entry.getValue());
-                                            ;
+                                                FirebaseDatabase.getInstance().getReference().child("Users").child(user.getUid()).child(team1_name + "vs" + team2_name).child(inner.get("playerID")).child(entry.getKey()).setValue(entry.getValue());
+                                                ;
+                                            }
                                         }
+                                        FirebaseDatabase.getInstance().getReference().child("User matches").child(user.getUid()).child(team1_name + "vs" + team2_name).child("teamName1").setValue(team1_name);
+                                        FirebaseDatabase.getInstance().getReference().child("User matches").child(user.getUid()).child(team1_name + "vs" + team2_name).child("teamName2").setValue(team2_name);
+
+                                        Intent intent = new Intent(TeamSelectionActivity.this, MainActivity.class);
+                                        startActivity(intent);
                                     }
-                                    FirebaseDatabase.getInstance().getReference().child("User matches").child(user.getUid()).child(team1_name + "vs" + team2_name).child("teamName1").setValue(team1_name);
-                                    FirebaseDatabase.getInstance().getReference().child("User matches").child(user.getUid()).child(team1_name + "vs" + team2_name).child("teamName2").setValue(team2_name);
+                                });
+                            }
 
-                                    Intent intent = new Intent(TeamSelectionActivity.this, MainActivity.class);
-                                    startActivity(intent);
-                                }
-                            });
                         }
+                    });
+                }
 
-                    }
-                });
-            }
-
-            @NonNull
-            @Override
-            public TeamViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
-                View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.player_card, viewGroup, false);
-                TeamViewHolder viewHolder = new TeamViewHolder(view);
-                return viewHolder;
-            }
-        };
+                @NonNull
+                @Override
+                public TeamViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+                    View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.player_card, viewGroup, false);
+                    TeamViewHolder viewHolder = new TeamViewHolder(view);
+                    return viewHolder;
+                }
+            };
 
 
-        Team1RecyclerList.setAdapter(adapter1);
-        adapter1.startListening();
+            Team1RecyclerList.setAdapter(adapter1);
+            adapter1.startListening();
 
-        Team2RecyclerList.setAdapter(adapter2);
-        adapter2.startListening();
+            Team2RecyclerList.setAdapter(adapter2);
+            adapter2.startListening();
+        }
+
     }
 
     public static class TeamViewHolder extends RecyclerView.ViewHolder {
@@ -441,6 +544,23 @@ public class TeamSelectionActivity extends AppCompatActivity {
             playerName = itemView.findViewById(R.id.playerName);
             playerCategory = itemView.findViewById(R.id.playerCategory);
             playerCredits = itemView.findViewById(R.id.playerCredits);
+            playerImage = itemView.findViewById(R.id.playerImage);
+        }
+    }
+
+    public static class TeamAdminViewHolder extends RecyclerView.ViewHolder {
+
+        //LinearLayout layout_ref;
+        TextView playerName, playerTeam, playerCategory, playerScore;
+        ImageView playerImage;
+
+        public TeamAdminViewHolder(@NonNull View itemView) {
+            super(itemView);
+
+            //layout_ref = (LinearLayout)itemView.findViewById(R.id.team_1_lin_layout);
+            playerName = itemView.findViewById(R.id.playerName);
+            playerCategory = itemView.findViewById(R.id.playerCategory);
+            playerScore = itemView.findViewById(R.id.playerScore);
             playerImage = itemView.findViewById(R.id.playerImage);
         }
     }
