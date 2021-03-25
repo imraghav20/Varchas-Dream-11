@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import java.util.Calendar;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,11 +20,12 @@ import com.example.varchasdream11.TeamSelection.TeamSelectionActivity;
 import com.example.varchasdream11.databinding.ActivitySportsBinding;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
@@ -34,6 +35,8 @@ public class Sports extends AppCompatActivity {
     private DatabaseReference MatchRef;
     private String sports_name;
     ActivitySportsBinding binding;
+    String Admin1 = "68uWy2ZdfuOKNSmNWvwfYiUgFXF2";
+    String Admin2 = "fsGosgz47mSfZk6RbRA4JMSNTAV2";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,7 +77,7 @@ public class Sports extends AppCompatActivity {
 
                 //String input = "20:00 07:03";
                 String input = model.getMatchTime();
-                if(input != null) {
+                if (input != null) {
 
 
                     int month_ref, date_ref, hrs_ref, min_ref;
@@ -117,16 +120,13 @@ public class Sports extends AppCompatActivity {
                             // Days format
                             String time = "";
                             time = days + " days to go";
-                            if (days==1){
+                            if (days == 1) {
                                 time = days + " day to go";
-                            }
-                            else if(days==0 && hours==0 && minutes==0){
+                            } else if (days == 0 && hours == 0 && minutes == 0) {
                                 time = seconds % 60 + " s";
-                            }
-                            else if (days==0 && hours==0 ){
+                            } else if (days == 0 && hours == 0) {
                                 time = minutes % 60 + " m" + " : " + seconds % 60 + " s";
-                            }
-                            else if (days==0 ){
+                            } else if (days == 0) {
                                 time = hours + "h" + " : " + minutes % 60 + " m" + " : " + seconds % 60 + " s";
                             }
                             //Hours format
@@ -139,24 +139,34 @@ public class Sports extends AppCompatActivity {
                             holder.matchTime.setText("Time up!");
                         }
                     }.start();
-                }
-                else{
+                } else {
                     holder.matchTime.setText(model.getMatchTime());
                 }
+
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                final String curr_user = user.getUid();
+
+
+
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         String match_id = getRef(position).getKey();
+                        Intent matchIntent;
 
-                        Intent matchIntent = new Intent(Sports.this, TeamSelectionActivity.class);
+                        if (curr_user.equals(Admin1) || curr_user.equals(Admin2)) {
+                            matchIntent = new Intent(Sports.this, TeamSelectionActivity.class);
+                        }
+                        else {
+                            matchIntent = new Intent(Sports.this, TeamSelectionActivity.class);
+                        }
                         matchIntent.putExtra("match_id", match_id);
                         matchIntent.putExtra("team1Name", model.getTeam1Name());
                         matchIntent.putExtra("team2Name", model.getTeam2Name());
                         startActivity(matchIntent);
-
-
                     }
                 });
+
             }
 
             @NonNull

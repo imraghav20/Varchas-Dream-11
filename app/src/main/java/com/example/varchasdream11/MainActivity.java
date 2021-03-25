@@ -31,11 +31,15 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new DashboardFragment()).commit();
 
-        auth = FirebaseAuth.getInstance();
+        if (savedInstanceState == null) {
+            bottomNav.setSelectedItemId(R.id.contest); // change to whichever id should be default
+        }
+            auth = FirebaseAuth.getInstance();
 
 
     }

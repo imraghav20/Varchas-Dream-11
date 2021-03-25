@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     >
@@ -14,12 +14,45 @@
         android:layout_height="wrap_content"
         android:gravity="top"
         android:orientation="vertical"
-        android:paddingLeft="50dp"
-        android:paddingRight="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/colorPrimary"
         >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/button_dashboard_nuska"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:enabled="false"
+                android:paddingLeft="15dp"
+                android:text="Dashboard"
+                android:textAlignment="viewStart"
+                android:textAllCaps="false"
+                android:textColor="#fff"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/nuke_admin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:enabled="false"
+                android:text="Admin access"
+                android:visibility="gone"
+
+                 />
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#c0c0c0"/>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/dashboardLl1Card"
@@ -47,7 +80,7 @@
             android:layout_marginTop="10dp"
             android:gravity="center"
             android:text="Name"
-            android:textColor="#000000"
+            android:textColor="#fff"
             android:textSize="24sp" />
 
         <TextView
@@ -58,342 +91,17 @@
             android:layout_marginBottom="5dp"
             android:gravity="center"
             android:text="Email ID"
-            android:textColor="#000000"
+            android:textColor="#fff"
             android:textSize="18sp" />
     </LinearLayout>
 
-    <ScrollView
-        android:id="@+id/dashboardScroll"
+    <com.airbnb.lottie.LottieAnimationView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_below="@id/dashboardLl1"
-        android:layout_marginTop="20dp">
+        app:lottie_rawRes="@raw/lf30_editor_5vhfbrql"
+        app:lottie_loop="true"
+        app:lottie_autoPlay="true"
+        tools:ignore="MissingConstraints" />
 
-        <LinearLayout
-            android:id="@+id/dashboardLl2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            tools:ignore="MissingConstraints">
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/dashboardCard1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="20dp"
-                app:cardBackgroundColor="#FFF"
-                app:cardCornerRadius="5dp">
-
-                <LinearLayout
-                    android:id="@+id/dashboardCard1Ll1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:id="@+id/dashboardCard1Img"
-                        android:layout_width="50dp"
-                        android:layout_height="100dp"
-                        android:layout_marginEnd="5dp"
-                        android:layout_weight="1"
-                        app:srcCompat="@drawable/varchas_dummy_logo" />
-
-                    <LinearLayout
-                        android:id="@+id/dashboardCard1Ll2"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="5dp"
-                        android:layout_weight="4"
-                        android:orientation="vertical">
-
-                        <LinearLayout
-                            android:id="@+id/dashboardRankLL"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginBottom="5dp"
-                            android:layout_weight="1"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:id="@+id/dashboardRankText"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="3"
-                                android:text="@string/rank_in_leaderboard" />
-
-                            <TextView
-                                android:id="@+id/dashboardRankNum"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="xyz" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/dashboardTotalMLL"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginBottom="5dp"
-                            android:layout_weight="1"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:id="@+id/dashboardTotalMtext"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="3"
-                                android:text="Total matches participated" />
-
-                            <TextView
-                                android:id="@+id/dashboardTotalMNum"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="xyz" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/dashboardTotalScoreLL"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginBottom="5dp"
-                            android:layout_weight="1"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:id="@+id/dashboardTotalScoreText"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="3"
-                                android:text="Total score" />
-
-                            <TextView
-                                android:id="@+id/dashboardTotalScoreNum"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="xyz" />
-                        </LinearLayout>
-
-                    </LinearLayout>
-                </LinearLayout>
-
-
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/dashboardCard2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="20dp"
-                app:cardBackgroundColor="#FFF"
-                app:cardCornerRadius="5dp">
-
-                <LinearLayout
-                    android:id="@+id/dashboardCard2Ll1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:id="@+id/dashboardCard2Img"
-                        android:layout_width="50dp"
-                        android:layout_height="100dp"
-                        android:layout_marginRight="5dp"
-                        android:layout_weight="1"
-                        app:srcCompat="@drawable/varchas_dummy_logo" />
-
-                    <LinearLayout
-                        android:id="@+id/dashboardCard2Ll2"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="5dp"
-                        android:layout_weight="4"
-                        android:orientation="vertical">
-
-                        <LinearLayout
-                            android:id="@+id/dashboardMatchNameLL"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginBottom="5dp"
-                            android:layout_weight="1"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:id="@+id/dashboardMatchNameText"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="3"
-                                android:text="Match name" />
-
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/dashboardMatchScoreLL"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginBottom="5dp"
-                            android:layout_weight="1"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:id="@+id/dashboardMatchScoreText"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="3"
-                                android:text="Score of the match participated" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/dashboardYourScoreLL"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginBottom="5dp"
-                            android:layout_weight="1"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:id="@+id/dashboardYourScoreText"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="3"
-                                android:text="Your score" />
-
-                            <TextView
-                                android:id="@+id/dashboardYourScoreNum"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="xyz" />
-                        </LinearLayout>
-
-                    </LinearLayout>
-                </LinearLayout>
-
-
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/dashboardCard3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
-                app:cardBackgroundColor="#FFF"
-                app:cardCornerRadius="5dp">
-
-                <LinearLayout
-                    android:id="@+id/dashboardCard3Ll1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:id="@+id/dashboardCard3Img"
-                        android:layout_width="50dp"
-                        android:layout_height="100dp"
-                        android:layout_marginRight="5dp"
-                        android:layout_weight="1"
-                        app:srcCompat="@drawable/varchas_dummy_logo" />
-
-                    <LinearLayout
-                        android:id="@+id/dashboardCard3Ll2"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="5dp"
-                        android:layout_weight="4"
-                        android:orientation="vertical">
-
-                        <LinearLayout
-                            android:id="@+id/dashboardMatch1LL"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginBottom="5dp"
-                            android:layout_weight="1"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:id="@+id/dashboardMatch1Text"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="3"
-                                android:text="1st match xyz" />
-
-                            <TextView
-                                android:id="@+id/dashboardMatch1Num"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="xyz" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/dashboardMatch2LL"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginBottom="5dp"
-                            android:layout_weight="1"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:id="@+id/dashboardMatch2Text"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="3"
-                                android:text="2nd match xyz" />
-
-                            <TextView
-                                android:id="@+id/dashboardMatch2Num"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="xyz" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/dashboardMatch3LL"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginBottom="5dp"
-                            android:layout_weight="1"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:id="@+id/dashboardMatch3Text"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="3"
-                                android:text="3rd match xyz" />
-
-                            <TextView
-                                android:id="@+id/dashboardMatch3Num"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="xyz" />
-                        </LinearLayout>
-
-                    </LinearLayout>
-                </LinearLayout>
-
-
-            </androidx.cardview.widget.CardView>
-        </LinearLayout>
-    </ScrollView>
 </RelativeLayout>
